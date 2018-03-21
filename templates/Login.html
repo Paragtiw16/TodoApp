@@ -1,0 +1,21 @@
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			  crossorigin="anonymous"></script>
+</head>
+  {% load staticfiles %}
+ <script type="text/javascript" src="{% static 'js/login.js' %} "></script>
+<body>
+
+   <form>
+       <h1>LOGIN PAGE</h1><br/>
+{#       <p> Message:{{ Message }}</p>#}
+       Email:<input type="text"id="email" name="email"><br/>
+       Password:<input type="password" id="pwd" name="pwd"><br/>
+                <input type="submit" onclick="click3()"/>
+
+   </form>
+
+</body>
+</html>

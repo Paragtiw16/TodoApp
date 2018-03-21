@@ -1,0 +1,18 @@
+<html>
+<head>
+ <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			  crossorigin="anonymous"></script>
+    </head>
+{% load staticfiles %}
+<script type="text/javascript" src="{% static 'js/otp.js' %} "></script>
+
+<body>
+<p> Message:{{ Message }}</p>
+OTP: <input type="number" id="otp" name="otp"><br/>
+Email:<input type="email" id="emmail" value="{{ Email }}" disabled><br/>
+
+{{ JSON }}
+<input type="submit" onclick="click2()"/>
+</body>
+</html>
