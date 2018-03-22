@@ -31,7 +31,7 @@ function click3() {
                         console.log(check.Message);
                         alert(check.Message);
 
-                        window.location.href="/ajax/login_login";
+                        window.location.href="/todo/login_login";
 
 
 

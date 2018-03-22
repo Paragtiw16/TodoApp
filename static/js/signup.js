@@ -26,9 +26,6 @@ function click1() {
                    }
 
 
-
-
-
          }
     });
 }

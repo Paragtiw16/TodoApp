@@ -1,3 +1,4 @@
+import datetime
 import jwt
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -157,4 +158,77 @@ def home(request):
          encoded = jwt.encode(decoded, key, algorithm='HS256')
          return render(request, "home.html",{"Email":email,"Username":username,
                                               "Contact_no":contactno,"Encoded":encoded})
+    elif request.method == "POST":
+        print("Insiddeeeeee llooooogggiiinnn POOOOSSTTT")
+        mytitle = request.POST.get('Title')
+        print("Title=",mytitle)
+        # myselect = request.POST.get('Select')
+        # print("Select Field=",myselect)
+        mydesc = request.POST.get('Desc')
+        print("Description=",mydesc)
+        mydate = request.POST.get('Date')
+        print("Dateeeeee=",mydate)
+        # gettoken = request.POST.get('Token')
+        # defaultdate=datetime.date.today
+        # print("Deeeefaaullltttt Dayyyyyy=",defaultdate)
+        datee=datetime.datetime.strptime(mydate, '%d/%m/%Y').strftime('%Y-%m-%d')
+        print("Date Object=====",datee)
+        # print("Tokennnnnn======",gettoken)
+        # if mydate< datetime.date.today():
+        #     msg = "Please enter correct Date Format"
+        #     print("Messaaggeeeeee=", msg)
+        #     return JsonResponse({"Message": msg, "Success": False})
+        # else:
+        key = 'secret'
+        encoded = request.POST.get('Token')
+        print("getting encoding value=", encoded)
+        decoded = jwt.decode(encoded, key, algorithms='HS256')
+        encoded = jwt.encode(decoded, key, algorithm='HS256')
+
+        print("Decodedddddddd Jsssooonnnn=", decoded)
+        ID = decoded['Id']
+        print("Idddddd=====", ID)
+        try:
+
+            data1 = Userdata.objects.get(id=ID)
+        except Exception, e:
+            print("Apna  Error=", str(e))
+        print(data1)
+        # username = data1.username
+        # email = data1.email
+        tododetails=Tododata.objects.create(first=data1,title=mytitle, description=mydesc ,
+                                    duedate =datee)
+        print("Returningggg successssssssssssss")
+        return JsonResponse({"Token": encoded, "Success": True})
+
+
+
+def profile(request):
+    if request.method == "GET":
+        # print('OOOOOOOOOOTTTTTTTTTTPPPPPPPP')
+         print("Insideeeeeeeeeee Profileeeee")
+         key = 'secret'
+         encoded=request.GET.get('Token')
+         print("getting encoding value=",encoded)
+         decoded = jwt.decode(encoded, key, algorithms='HS256')
+         encoded = jwt.encode(decoded, key, algorithm='HS256')
+
+         print("Decodedddddddd Jsssooonnnn=",decoded)
+         ID=decoded['Id']
+         print("Idddddd=====",ID)
+         try:
+
+             data1 = Userdata.objects.get(id=ID)
+         except Exception, e:
+               print("Apna  Error=", str(e))
+         print(data1)
+         username=data1.username
+         email =data1.email
+         contactno=data1.contactno
+         encoded = jwt.encode(decoded, key, algorithm='HS256')
+         return render(request, "profile.html",{"Email":email,"Username":username,
+                                              "Contact_no":contactno,"Encoded":encoded})
+
+
+
 
