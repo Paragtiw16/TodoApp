@@ -1,7 +1,7 @@
 import datetime
 import jwt
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from django.utils.crypto import random
 # Create your views here.
 from django.views.decorators.csrf import csrf_exempt
@@ -228,7 +228,65 @@ def profile(request):
          encoded = jwt.encode(decoded, key, algorithm='HS256')
          return render(request, "profile.html",{"Email":email,"Username":username,
                                               "Contact_no":contactno,"Encoded":encoded})
+@csrf_exempt
+def display(request):
+    if request.method == "GET":
+        print("Insideeeee displayyy GETTTTTTTTTT")
+        mytype = request.GET.get('Type')
+        Mytype=int(mytype)
+        print("TYYYPEEEEE=",Mytype)
+        token = request.GET.get('Encoded')
+        print("My tokennnnnn==",token)
+        key = 'secret'
+        decoded = jwt.decode(token, key, algorithms='HS256')
+        encoded = jwt.encode(decoded, key, algorithm='HS256')
+        ID = decoded['Id']
+        data1 = Userdata.objects.get(id=ID)
+        # data2 =Tododata.objects.get(first=data1)
+        # myduedate=data2.duedate
+        # print("All duedates===",myduedate)
+        # mystatus=data2.status
+        # print("All Status===",mystatus)
+        nowdate = datetime.datetime.today().date()
+        print("Nowwww dateeeee===", nowdate)
+        datee = datetime.datetime.strptime(str(nowdate), ('%Y-%m-%d')).strftime('%Y-%m-%d')
+        print("Comaparedd Date===", datee)
+        print("Outsideeeee ifffff")
+        if Mytype==-1:
+            print("Insideeeee Ifffffffffffff")
+            # nowdate=datetime.datetime.today().date()
+            # print("Nowwww dateeeee===",nowdate)
+            # datee = datetime.datetime.strptime(str(nowdate), ('%Y-%m-%d')).strftime('%Y-%m-%d')
+            # print("Comaparedd Date===",datee)
+            qdata1= Tododata.objects.filter(first=data1,status=False,
+                                            duedate__lt=datee)
+            print("Query Set for -11111=",qdata1)
+            bjson =[]
+            for i in qdata1:
+                  ostatus=i.status
+                  oduedate=i.duedate
+                  odesc=i.description
+                  otitle=i.title
+                  print("After loop status==",ostatus)
+                  print("After loop duedate==",oduedate)
+                  print("After loop desc==", odesc)
+                  print("After loop title==", otitle)
+                  tempjson={"Status":ostatus,"Duedate":oduedate,"Desc":odesc,
+                            "Title":otitle}
+
+                  bjson.append(tempjson)
+            print("Bjsoonnn=",bjson)
 
 
+            return render_to_response("show.html",{"Bjson":bjson,"Success": True})
+
+
+        elif mytype==0:
+            qdata2 = Tododata.objects.filter(first=data1,status=False,
+                                                     duedate__gte=datee)
+            print("Query set for 00000==",qdata2)
+        else:
+            qdata3=Tododata.objects.filter(status=True)
+            print("Query set for 11111====",qdata3)
 
 
