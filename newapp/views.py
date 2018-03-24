@@ -1,7 +1,9 @@
 import datetime
 import jwt
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, render_to_response
+from django.template import Context
+from django.template.loader import get_template
 from django.utils.crypto import random
 # Create your views here.
 from django.views.decorators.csrf import csrf_exempt
@@ -276,17 +278,64 @@ def display(request):
 
                   bjson.append(tempjson)
             print("Bjsoonnn=",bjson)
+            template=get_template('show.html')
+            context=Context({"Bjson":bjson,"Success": True, "Encoded":encoded})
+            html=template.render(context)
+            return HttpResponse(html)
 
 
-            return render_to_response("show.html",{"Bjson":bjson,"Success": True})
+            # encoded = jwt.encode(decoded, key, algorithm='HS256')
+            # return render_to_response("show.html",{"Bjson":bjson,"Success": True,
+            #                                        "Encoded":encoded})
+            # return render(request,"show.html",{"Bjson":bjson})
 
-
-        elif mytype==0:
+        elif Mytype==0:
+            print("Insideee O functionality")
             qdata2 = Tododata.objects.filter(first=data1,status=False,
                                                      duedate__gte=datee)
             print("Query set for 00000==",qdata2)
+            bjson = []
+            for i in qdata2:
+                ostatus = i.status
+                oduedate = i.duedate
+                odesc = i.description
+                otitle = i.title
+                print("After loop status==", ostatus)
+                print("After loop duedate==", oduedate)
+                print("After loop desc==", odesc)
+                print("After loop title==", otitle)
+                tempjson = {"Status": ostatus, "Duedate": oduedate, "Desc": odesc,
+                            "Title": otitle}
+
+                bjson.append(tempjson)
+            print("Bjsoonnn=", bjson)
+            template = get_template('show.html')
+            context = Context({"Bjson": bjson, "Success": True, "Encoded": encoded})
+            html = template.render(context)
+            return HttpResponse(html)
         else:
+            print("Insidee 111 FUNCTIONALITY")
             qdata3=Tododata.objects.filter(status=True)
             print("Query set for 11111====",qdata3)
+            bjson = []
+            for i in qdata3:
+                ostatus = i.status
+                oduedate = i.duedate
+                odesc = i.description
+                otitle = i.title
+                print("After loop status==", ostatus)
+                print("After loop duedate==", oduedate)
+                print("After loop desc==", odesc)
+                print("After loop title==", otitle)
+                tempjson = {"Status": ostatus, "Duedate": oduedate, "Desc": odesc,
+                            "Title": otitle}
+
+                bjson.append(tempjson)
+            print("Bjsoonnn=", bjson)
+            template = get_template('show.html')
+            context = Context({"Bjson": bjson, "Success": True, "Encoded": encoded})
+            html = template.render(context)
+            return HttpResponse(html)
+
 
 

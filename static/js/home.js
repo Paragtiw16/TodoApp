@@ -5,19 +5,30 @@
 $(document).ready(function () {
     $('.tabs').tabs();
     $('.modal').modal();
+     $('.modal2').modal();
+    //  $('#modal').modal('type','id');
     $('select').formSelect();
+
     $('.datepicker').datepicker({
         format:'dd/mm/yyyy',
         parse:null,
         firstDay:0,
         // minDate:Date.now(),
         // minDate:today.getDate(),
-        minDate:new Date(),
+        // minDate:new Date(),
         maxDate:null});
-
+        updateTabContent(-1);
 
 
 });
+ // function click5(type,id)
+ // {
+ //     $('.modal2').modal('open');
+ //     var getid = document.getElementById('id').value;
+ //     var gettype = document.getElementById('type').value;
+ //
+ //
+ // }
 function updateTabContent(type)
 {
     alert(type);
@@ -68,36 +79,21 @@ function callAPI(JSON) {
 
         url: '/todo/display/',
         method: "GET",
-        data: JSON
-        // // dataType: 'application/json; charset=utf-8',
-        // success:function (base)
-        // {
-        //     console.log(base);
-        //     alert(base);
-        //     alert(base.Success);
-        //     // token=check.Encoded;
-        //     if(base.Success==true)
-        //     {
-        //
-        //         console.log("Insideeeee succcessss offf LLLooogginnn");
-        //         // myemail=check"Title": gettitle.Email
-        //         token=base.Token
-        //         window.location.href="/todo/profile?Token="+token;
-        //     }
-        //     else
-        //     {
-        //         console.log("Innnnsiiiideee Faaalllseee of login  jssss");
-        //
-        //         alert(base.Message);
-        //
-        //
-        //         window.location.href="/todo/home";
-        //
-        //
-        //
-        //     }
-        // }
+        data: JSON,
+        // dataType: 'application/json; charset=utf-8',
+        success:function (html)
+        {
+            console.log(html);
+            $('#tab_content').html(html);
+
+
+
+
+
+            }
+
     });
+
 
 
 

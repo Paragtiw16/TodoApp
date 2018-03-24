@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 
-from datetime import date
+from datetime import date, datetime
 
 from django.db import models
 
@@ -29,6 +29,7 @@ class Tododata(models.Model):
     title=models.CharField(max_length=550, null=True, blank=True)
     description=models.CharField(max_length=550, null=True, blank=True)
     duedate=models.DateField(default=date.today, null=True, blank=True)
+    # complete_date=models.DateField(default=datetime.today)
     status = models.BooleanField(default=False)
 
     def __unicode__(self):
