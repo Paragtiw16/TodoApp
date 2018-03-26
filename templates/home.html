@@ -49,9 +49,25 @@
     </div>
     <div class="modal-footer">
         <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat"
-           onclick="click4()"/>Submit</a>
+           onclick="click4()">Submit</a>
     </div>
 </div>
+<!-- Modal Structure -->
+{#    <div id="modal3" class="modal2">#}
+{#    <div class="modal-content">#}
+{#      <h4>Changing status</h4>#}
+{#      <input type="hidden"  placeholder="Enter ID" id="id" name="id" value="{{ Type  }}">#}
+{#        <br/>#}
+{#        <input type="hidden"  placeholder="Enter Type" id="type" name="type" value="{{ i.ID }}">#}
+{#        <br/>#}
+{##}
+{##}
+{#    </div>#}
+{#    <div class="modal-footer">#}
+{#      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Save</a>#}
+{#    </div>#}
+{#  </div>#}
+
 <!-- Modal Trigger -->
 <button data-target="modal1" class="btn modal-trigger">Create a New Todo</button>
 <div class="row">
@@ -75,26 +91,29 @@
 {#                </div>#}
             </div>
         </div>
-    </div></div>
-</div>
-</div>
-</div>
+    </div>
+
 <!-- Modal Trigger -->
 {#  <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>#}
 
   <!-- Modal Structure -->
-  <div id="modal2" class="modal">
+    <div id="modal3" class="modal">
     <div class="modal-content">
       <h4>Changing status</h4>
-      <input type="hidden"  placeholder="Enter ID" id="id" name="id"><br/>
-        <input type="hidden"  placeholder="Enter Type" id="type" name="type"><br/>
+      <input type="number"  placeholder="Enter ID" id="modelid" name="id" value="">
+        <br/>
+        <input type="text"  placeholder="Enter Type" id="modeltype" name="type" value="">
+
+        <br/>
 
 
     </div>
     <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat"
+      onclick="click6()">Save</a>
     </div>
   </div>
+
 <!-- Modal Trigger -->
 {#  <button data-target="modal2" class="btn modal-trigger">Modal</button>#}
 

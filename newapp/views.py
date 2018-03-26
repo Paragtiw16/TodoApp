@@ -244,6 +244,7 @@ def display(request):
         encoded = jwt.encode(decoded, key, algorithm='HS256')
         ID = decoded['Id']
         data1 = Userdata.objects.get(id=ID)
+        print("Data1",data1)
         # data2 =Tododata.objects.get(first=data1)
         # myduedate=data2.duedate
         # print("All duedates===",myduedate)
@@ -261,25 +262,32 @@ def display(request):
             # datee = datetime.datetime.strptime(str(nowdate), ('%Y-%m-%d')).strftime('%Y-%m-%d')
             # print("Comaparedd Date===",datee)
             qdata1= Tododata.objects.filter(first=data1,status=False,
-                                            duedate__lt=datee)
+                                            duedate__lt=nowdate)
             print("Query Set for -11111=",qdata1)
             bjson =[]
-            for i in qdata1:
-                  ostatus=i.status
-                  oduedate=i.duedate
-                  odesc=i.description
-                  otitle=i.title
-                  print("After loop status==",ostatus)
-                  print("After loop duedate==",oduedate)
-                  print("After loop desc==", odesc)
-                  print("After loop title==", otitle)
-                  tempjson={"Status":ostatus,"Duedate":oduedate,"Desc":odesc,
-                            "Title":otitle}
+            try:
 
-                  bjson.append(tempjson)
-            print("Bjsoonnn=",bjson)
+                for i in qdata1:
+                      ostatus=i.status
+                      oduedate=i.duedate
+                      odesc=i.description
+                      otitle=i.title
+                      Id=i.id
+                      print("After loop status==",ostatus)
+                      print("After loop duedate==",oduedate)
+                      print("After loop desc==", odesc)
+                      print("After loop title==", otitle)
+                      print("Id====",Id)
+                      tempjson={"Status":ostatus,"Duedate":oduedate,"Desc":odesc,
+                                "Title":otitle,"ID":Id}
+
+                      bjson.append(tempjson)
+                print("Bjsoonnn=",bjson)
+            except Exception, e:
+                print("Our Error=", str(e))
             template=get_template('show.html')
-            context=Context({"Bjson":bjson,"Success": True, "Encoded":encoded})
+            context=Context({"Bjson":bjson,"Success": True, "Encoded":encoded,
+                             "Type":Mytype})
             html=template.render(context)
             return HttpResponse(html)
 
@@ -323,10 +331,12 @@ def display(request):
                 oduedate = i.duedate
                 odesc = i.description
                 otitle = i.title
+                Iddd=i.id
                 print("After loop status==", ostatus)
                 print("After loop duedate==", oduedate)
                 print("After loop desc==", odesc)
                 print("After loop title==", otitle)
+                print("Idddddddddddddd=",Iddd)
                 tempjson = {"Status": ostatus, "Duedate": oduedate, "Desc": odesc,
                             "Title": otitle}
 
@@ -336,6 +346,27 @@ def display(request):
             context = Context({"Bjson": bjson, "Success": True, "Encoded": encoded})
             html = template.render(context)
             return HttpResponse(html)
+
+@csrf_exempt
+def updatetodostatus(request):
+    if request.method == "POST":
+        print("Insideeeee todostatus POSTTTTTTTTT")
+        myid= request.POST.get('Id')
+        print("Id======",myid)
+        mytype = request.POST.get('Type')
+        print("Typeee====",mytype)
+        data1 = Tododata.objects.get(id=myid)
+        print("Instance of Todo TABLE=====",data1)
+        nowdate = datetime.datetime.today().date()
+        # qdata1 = Tododata.objects.get(first=data1, status=True,
+        #                                  complete_date=nowdate)
+        data1.status=True
+        data1.complete_date=nowdate
+        data1.save()
+        msg="This Todo has been completed"
+        return JsonResponse({"Message":msg, "Success": True})
+
+
 
 
 

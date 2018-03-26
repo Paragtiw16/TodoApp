@@ -1,7 +1,7 @@
 
 from django.conf.urls import url
 
-from newapp.views import signup, login_login, otppage, home, profile, display
+from newapp.views import signup, login_login, otppage, home, profile, display, updatetodostatus
 
 urlpatterns = [
 
@@ -11,7 +11,8 @@ urlpatterns = [
      url(r'^otppage/$',otppage),
      url(r'^home/$',home),
     url(r'^display/$', display),
-    url(r'^profile/$',profile)
+    url(r'^profile/$',profile),
+   url(r'^updatetodostatus/$',updatetodostatus)
 
 
     # url(r'^edit/$',edit)

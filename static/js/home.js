@@ -5,7 +5,7 @@
 $(document).ready(function () {
     $('.tabs').tabs();
     $('.modal').modal();
-     $('.modal2').modal();
+     $('#modal3').modal();
     //  $('#modal').modal('type','id');
     $('select').formSelect();
 
@@ -21,14 +21,67 @@ $(document).ready(function () {
 
 
 });
- // function click5(type,id)
- // {
- //     $('.modal2').modal('open');
- //     var getid = document.getElementById('id').value;
- //     var gettype = document.getElementById('type').value;
- //
- //
- // }
+ function click5(type,id)
+ {
+     alert("Inside Status function");
+     alert(type);
+     alert(id);
+     document.getElementById('modelid').value=id;
+     document.getElementById('modeltype').value=type
+     $('#modal3').modal('open');
+     // var getid = document.getElementById('id').value;
+     // alert(getid)
+     // var gettype = document.getElementById('type').value;
+     // alert(gettype)
+     // $('.modal2').modal('open');
+
+
+
+ }
+ function click6()
+ {
+      var getid = document.getElementById('modelid').value;
+    var gettype = document.getElementById('modeltype').value;
+     alert(getid);
+     alert(gettype);
+     $.ajax({
+
+        url: '/todo/updatetodostatus/',
+        method: "POST",
+        data: {"Id":getid,"Type":gettype},
+        // dataType: 'application/json; charset=utf-8',
+        success:function (yes)
+        {
+            console.log(yes);
+            alert(yes);
+            alert(yes.Success);
+            // token=check.Encoded;
+            if(yes.Success==true)
+            {
+
+                console.log("Insideeeee succcessss offf Todo Status");
+                // myemail=check.Email
+                message=yes.Message;
+                alert(message);
+
+                // window.location.href="/todo/profile?Token="+token;
+            }
+            else
+            {
+                console.log("Innnnsiiiideee Faaalllseee of login  jssss");
+
+                alert(base.Message);
+
+
+                window.location.href="/todo/home";
+
+
+
+            }
+        }
+    });
+
+ }
 function updateTabContent(type)
 {
     alert(type);
@@ -86,19 +139,11 @@ function callAPI(JSON) {
             console.log(html);
             $('#tab_content').html(html);
 
-
-
-
-
             }
 
     });
 
-
-
-
 }
-
 
 function click4() {
     var gettitle = document.getElementById('title').value;
