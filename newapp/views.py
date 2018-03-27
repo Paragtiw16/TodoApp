@@ -117,7 +117,7 @@ def login_login(request):
                     print("MyEmail==",myemail)
                     key = 'secret'
                     encoded=jwt.encode({'email':myemail,'Id':id},key,algorithm='HS256')
-                    # request.session['Encoded'] =encoded
+                    request.session['Encoded'] =encoded
                     print("afterrr ennncoooddingggg")
                     return JsonResponse({"Message": "success", "Success": True,
                                          "Encoded":encoded})
@@ -143,7 +143,7 @@ def home(request):
          encoded=request.GET.get('Token')
          print("getting encoding value=",encoded)
          decoded = jwt.decode(encoded, key, algorithms='HS256')
-         encoded = jwt.encode(decoded, key, algorithm='HS256')
+         # encoded = jwt.encode(decoded, key, algorithm='HS256')
 
          print("Decodedddddddd Jsssooonnnn=",decoded)
          ID=decoded['Id']
@@ -239,9 +239,12 @@ def display(request):
         print("TYYYPEEEEE=",Mytype)
         token = request.GET.get('Encoded')
         print("My tokennnnnn==",token)
+        mydate = request.GET.get('Date')
+        print("Dateeeee===",mydate)
         key = 'secret'
         decoded = jwt.decode(token, key, algorithms='HS256')
         encoded = jwt.encode(decoded, key, algorithm='HS256')
+        datee = datetime.datetime.strptime(mydate, '%d/%m/%Y').strftime('%Y-%m-%d')
         ID = decoded['Id']
         data1 = Userdata.objects.get(id=ID)
         print("Data1",data1)
@@ -262,7 +265,7 @@ def display(request):
             # datee = datetime.datetime.strptime(str(nowdate), ('%Y-%m-%d')).strftime('%Y-%m-%d')
             # print("Comaparedd Date===",datee)
             qdata1= Tododata.objects.filter(first=data1,status=False,
-                                            duedate__lt=nowdate)
+                                            duedate__lt=nowdate,complete_date=datee)
             print("Query Set for -11111=",qdata1)
             bjson =[]
             try:
@@ -323,7 +326,7 @@ def display(request):
             return HttpResponse(html)
         else:
             print("Insidee 111 FUNCTIONALITY")
-            qdata3=Tododata.objects.filter(status=True)
+            qdata3=Tododata.objects.filter(first=data1,status=True)
             print("Query set for 11111====",qdata3)
             bjson = []
             for i in qdata3:

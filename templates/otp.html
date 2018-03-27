@@ -1,3 +1,4 @@
+{% include 'header.html' %}
 <html>
 <head>
     {% load static %}
@@ -25,7 +26,7 @@
     <div class="col s12 m8 l8 offset-l2 offset-m2">
       <div class="card ">
         <div class="card-content white-text">
-          <span class="card-title  center green darken-4" >OTP PAGE</span>
+          <span class="card-title " id="upper" >OTP PAGE</span>
           <input type="number" id="otp" placeholder="Enter Otp" name="otp"><br/>
             <input type="email" id="emmail" value="{{ Email }}" disabled><br/>
 
@@ -48,3 +49,4 @@
 
 </body>
 </html>
+{% include 'base.html' %}

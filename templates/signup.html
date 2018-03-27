@@ -1,3 +1,4 @@
+{% include 'header.html' %}
 <html>
  {% load static %}
 <head>
@@ -24,14 +25,14 @@
     <div class="col s12 m8 l8 offset-l2 offset-m2">
       <div class="card ">
         <div class="card-content white-text">
-          <span class="card-title  " id="button">SIGNUP PAGE</span>
+          <span class="card-title  " id="upper">SIGNUP PAGE</span>
           <input type="text"  placeholder="Enter Username" id="uname" name="uname"><br/>
           <input type="password"  placeholder="Enter Password" id="pwd" name="pwd"><br/>
             <input type="email" placeholder="Enter Email"  id="email" name="email" ><br/>
             <input type="number" placeholder="Enter Number" id="number" name="number"><br/>
 
 
-            <button class="btn" id="button" type="submit" name="action"
+            <button class="btn center green darken-4" id="button" type="submit" name="action"
             onclick="click1()">Submit
     <i class="material-icons right">send</i>
   </button>
@@ -44,6 +45,8 @@
       </div>
     </div>
   </div>
+{#<a onclick="M.toast({html: 'I am a toast'})" class="btn">Toast!</a>#}
+{#  M.toast({html: 'I am a toast!', classes: 'rounded'});#}
 {#      <h1>Signup Page</h1>#}
 {#      <p> Message:{{ Message }}</p>#}
 {#      Username:<input type="text"  placeholder="Enter Username" id="uname" name="uname"><br/>#}
@@ -60,3 +63,4 @@
 
 
 </html>
+{% include 'base.html' %}

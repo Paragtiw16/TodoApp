@@ -1,5 +1,9 @@
+{% include 'header.html' %}<br><br>
 <html>
+
+
 {% load static %}
+
 <head>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
 			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -27,11 +31,11 @@
 {##}
 {#       Password:<input type="password" id="pwd" name="pwd"><br/>#}
 {#                <input type="submit" onclick="click3()"/>#}
-<div id="login" class="row">
+<div id="login" class="row" id="loginn">
     <div class="col s12 m8 l8 offset-l2 offset-m2">
       <div class="card ">
         <div class="card-content white-text">
-          <span class="card-title  center green darken-4" >LOGIN PAGE</span>
+          <span class="card-title" id="upper" >LOGIN PAGE</span>
           <input type="text" placeholder="Enter Email" id="email" name="email"><br/>
 
        <input type="password"  placeholder="Enter Password" id="pwd" name="pwd"><br/>
@@ -41,10 +45,10 @@
   </button>
 {#                <input type="submit" onclick="click3()"/>#}
         </div>
-        <div class="card-action">
+{#        <div class="card-action">#}
 {#          <a href="#">This is a link</a>#}
 {#          <a href="#">This is a link</a>#}
-        </div>
+{#        </div>#}
       </div>
     </div>
   </div>
@@ -52,3 +56,4 @@
 
 </body>
 </html>
+{% include 'base.html' %}

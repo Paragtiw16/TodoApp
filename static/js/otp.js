@@ -1,8 +1,13 @@
 function click2() {
     var get_otp = document.getElementById('otp').value;
+    if (get_otp==null || get_otp=="") {
+        // alert("Username must be filled out");
+         M.toast({html: 'Please enter OTP!', classes: 'rounded'});
+        return false;
+    }
     var myemail = document.getElementById('emmail').value;
 
-    alert(get_otp);
+    // alert(get_otp);
 
     // alert(myemail);
 
@@ -15,22 +20,23 @@ function click2() {
 
         // dataType: 'application/json; charset=utf-8',
         success: function (script) {
-            alert("HHHHHHHHEEEEEEEELLLLLLLLOOOOOOOOO");
-            console.log(script);
-            alert(script);
-            alert(script.Success);
+            // alert("HHHHHHHHEEEEEEEELLLLLLLLOOOOOOOOO");
+            // console.log(script);
+            // alert(script);
+            // alert(script.Success);
             if (script.Success == true) {
                 console.log("Insideee successsss off successs of otp");
                 window.location.href = "/todo/login_login";
             }
             else {
-                console.log("Innnnsiiiideee Faaalllseee");
-                console.log(script.Message);
-                get_msg = script.Message;
-                console.log(script.Email);
+                // console.log("Innnnsiiiideee Faaalllseee");
+                // console.log(script.Message);
+                // get_msg = script.Message;
+                 M.toast({html: 'Please enter Correct OTP!', classes: 'rounded'});
+                // console.log(script.Email);
                 myemaill = script.Email;
                 console.log(myemaill);
-                window.location.href = "/todo/otppage?Message=" + get_msg + "&MyEmail=" + myemaill
+                window.location.href = "/todo/otppage?&MyEmail=" + myemaill
 
 
             }

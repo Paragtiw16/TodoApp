@@ -12,6 +12,7 @@ $(document).ready(function () {
     $('.datepicker').datepicker({
         format:'dd/mm/yyyy',
         parse:null,
+        container:'body',
         firstDay:0,
         // minDate:Date.now(),
         // minDate:today.getDate(),
@@ -21,6 +22,12 @@ $(document).ready(function () {
 
 
 });
+function filterByDate() {
+    var getdate = document.getElementById('filter_date').value;
+    alert(getdate);
+    updateTabContent(getdate);
+
+}
  function click5(type,id)
  {
      alert("Inside Status function");
@@ -82,16 +89,17 @@ $(document).ready(function () {
     });
 
  }
-function updateTabContent(type)
+function updateTabContent(type,date)
 {
     alert(type);
+    alert(date);
     if(type===-1)
     {
 
         alert("Insideee -1 1st Methoddddd")
          var gettoken = document.getElementById('token').value;
         // json={"Type":-1,"Encoded":token};
-        c=getJson(type,gettoken);
+        c=getJson(type,gettoken,date);
          callAPI(c);
 
     }
@@ -119,9 +127,9 @@ function updateTabContent(type)
     }
 
 }
-function getJson(value,token) {
+function getJson(value,token,date) {
     alert("Inside Secondd Methoddd");
-    return {"Type":value,"Encoded":token};
+    return {"Type":value,"Encoded":token,"Date":date};
 
 }
 function callAPI(JSON) {
@@ -153,46 +161,64 @@ function click4() {
     // var getselect = document.getElementById('select').value;
 
 
+    if (gettitle == null || gettitle == "") {
+        // alert("Username must be filled out");
+        M.toast({html: ' Title field is empty!', classes: 'rounded'});
+        return false;
+    }
+    if (getdesc == null || getdesc == "") {
+        // alert("Username must be filled out");
+        M.toast({html: ' Description field is empty!', classes: 'rounded'});
+        return false;
+    }
+    if (getdate == null || getdate == "") {
+        // alert("Username must be filled out");
+        M.toast({html: ' Date field is Empty!', classes: 'rounded'});
+        return false;
+    }
 
-    alert(gettitle);
-    // alert(getselect);
-    alert(getdesc);
-    alert(getdate);
-    alert(gettoken);
-    $.ajax({
 
-        url: '/todo/home/',
-        method: "POST",
-        data: {"Title": gettitle,"Desc":getdesc,
-            "Date":getdate,"Token":gettoken},
-        // dataType: 'application/json; charset=utf-8',
-        success:function (base)
-        {
-            console.log(base);
-            alert(base);
-            alert(base.Success);
-            // token=check.Encoded;
-            if(base.Success==true)
-            {
+    else {
+        $.ajax({
 
-                console.log("Insideeeee succcessss offf LLLooogginnn");
-                // myemail=check.Email
-                token=base.Token
-                window.location.href="/todo/profile?Token="+token;
+            url: '/todo/home/',
+            method: "POST",
+            data: {
+                "Title": gettitle, "Desc": getdesc,
+                "Date": getdate, "Token": gettoken
+            },
+            // dataType: 'application/json; charset=utf-8',
+            success: function (base) {
+                console.log(base);
+                alert(base);
+                alert(base.Success);
+                // token=check.Encoded;
+                if (base.Success == true) {
+
+                    console.log("Insideeeee succcessss offf LLLooogginnn");
+                    // myemail=check.Email
+                    token = base.Token
+                    window.location.href = "/todo/profile?Token=" + token;
+                }
+                else {
+                    console.log("Innnnsiiiideee Faaalllseee of login  jssss");
+
+                    alert(base.Message);
+
+
+                    window.location.href = "/todo/home";
+
+
+                }
             }
-            else
-            {
-                console.log("Innnnsiiiideee Faaalllseee of login  jssss");
-
-                alert(base.Message);
-
-
-                window.location.href="/todo/home";
-
-
-
-            }
-        }
-    });
+        });
+    }
 }
 
+// function validateForm() {
+//     var x = document.forms["myForm"]["fname"].value;
+//     if (x == "") {
+//         alert("Name must be filled out");
+//         return false;
+//     }
+// }
