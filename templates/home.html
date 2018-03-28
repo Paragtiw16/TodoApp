@@ -75,10 +75,10 @@
 <button data-target="modal1" class="btn modal-trigger green darken-4">Create a New Todo</button>
 <div class="row">
     <div class="col s12">
-        <ul class="tabs">
-            <li class="tab col s3"onclick="updateTabContent(-1)"><a class="active" href="#">Overdue</a></li>
-            <li class="tab col s3"onclick="updateTabContent(0)"><a  href="#">Due</a></li>
-            <li class="tab col s3"onclick="updateTabContent(1)"><a href="#">Completed</a></li>
+        <ul class="tabs" id="tabs_todo">
+            <li class="tab col s3"onclick="updateTabContent(-1)"><a id="tab_-1" class="active" href="#">Overdue</a></li>
+            <li class="tab col s3"onclick="updateTabContent(0)"><a id="tab_0" href="#">Due</a></li>
+            <li class="tab col s3"onclick="updateTabContent(1)"><a id="tab_1" href="#">Completed</a></li>
         </ul>
     </div>
     <div id="tab_content" class="col s12"> <div class="row">

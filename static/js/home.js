@@ -23,16 +23,31 @@ $(document).ready(function () {
 
 });
 function filterByDate() {
+    console.log("Inside filter by date");
     var getdate = document.getElementById('filter_date').value;
+    var tabid=$("#tabs_todo").find('li a.active').attr('id');
+    // var getting = browser.tabs.get(integer. (-1));
+//     $('.tabs').click(function(){
+// var a=$(this).attr('id');
+// $('#sample').html('Active Tab is'+a);
+// });
+//     var tabid=$('.tabs. active').id;
+//     alert(tabid);
+    console.log("Tab Id=",tabid);
+   var tab = tabid.replace('tab_','');
+    console.log("Tab Id=",tab);
+    var newtabid=parseInt(tab);
+    console.log("new Tab Id=",newtabid);
+//     alert(getting);
     alert(getdate);
-    updateTabContent(getdate);
+    updateTabContent(newtabid,getdate);
 
 }
  function click5(type,id)
  {
-     alert("Inside Status function");
-     alert(type);
-     alert(id);
+     // alert("Inside Status function");
+     // alert(type);
+     // alert(id);
      document.getElementById('modelid').value=id;
      document.getElementById('modeltype').value=type
      $('#modal3').modal('open');
@@ -49,8 +64,8 @@ function filterByDate() {
  {
       var getid = document.getElementById('modelid').value;
     var gettype = document.getElementById('modeltype').value;
-     alert(getid);
-     alert(gettype);
+     // alert(getid);
+     // alert(gettype);
      $.ajax({
 
         url: '/todo/updatetodostatus/',
@@ -91,12 +106,12 @@ function filterByDate() {
  }
 function updateTabContent(type,date)
 {
-    alert(type);
-    alert(date);
+    // alert(type);
+    // alert(date);
     if(type===-1)
     {
 
-        alert("Insideee -1 1st Methoddddd")
+        // alert("Insideee -1 1st Methoddddd");
          var gettoken = document.getElementById('token').value;
         // json={"Type":-1,"Encoded":token};
         c=getJson(type,gettoken,date);
@@ -107,10 +122,10 @@ function updateTabContent(type,date)
     else if(type===0)
     {
 
-        alert("Insideee 0 2nd Methoddddd")
+        // alert("Insideee 0 2nd Methoddddd");
          var gettoken = document.getElementById('token').value;
         // json={"Type":-1,"Encoded":token};
-        c=getJson(type,gettoken);
+        c=getJson(type,gettoken,date);
          callAPI(c);
 
     }
@@ -118,23 +133,28 @@ function updateTabContent(type,date)
     else
     {
 
-        alert("Insideee 1 3rd Methoddddd")
+        // alert("Insideee 1 3rd Methoddddd");
+
          var gettoken = document.getElementById('token').value;
         // json={"Type":-1,"Encoded":token};
-        c=getJson(type,gettoken);
+        // alert(type);
+        // alert(date);
+        console.log("Date in 3 Method==",date);
+        c=getJson(type,gettoken,date);
+        console.log(c);
          callAPI(c);
 
     }
 
 }
 function getJson(value,token,date) {
-    alert("Inside Secondd Methoddd");
+    // alert("Inside Secondd Methoddd");
     return {"Type":value,"Encoded":token,"Date":date};
 
 }
 function callAPI(JSON) {
-    alert("Callinggg APPIIIIIII");
-    alert("JSONNNNNNN=",JSON);
+    // alert("Callinggg APPIIIIIII");
+    // alert("JSONNNNNNN=",JSON);
     console.log(JSON);
     $.ajax({
 
@@ -190,20 +210,20 @@ function click4() {
             // dataType: 'application/json; charset=utf-8',
             success: function (base) {
                 console.log(base);
-                alert(base);
-                alert(base.Success);
+                // alert(base);
+                // alert(base.Success);
                 // token=check.Encoded;
                 if (base.Success == true) {
 
                     console.log("Insideeeee succcessss offf LLLooogginnn");
                     // myemail=check.Email
                     token = base.Token
-                    window.location.href = "/todo/profile?Token=" + token;
+                    window.location.href = "/todo/home?Token=" + token;
                 }
                 else {
                     console.log("Innnnsiiiideee Faaalllseee of login  jssss");
 
-                    alert(base.Message);
+                    // alert(base.Message);
 
 
                     window.location.href = "/todo/home";

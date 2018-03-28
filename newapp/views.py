@@ -35,7 +35,7 @@ def signup(request):
             login_details = Userdata.objects.create(username=get_uname, password=get_pwd,
                                                   email=get_email, contactno=get_number)
             match_details =Otpdata.objects.create(otp=Otp, new=login_details)
-            todo_details=Tododata.objects.create(first=login_details)
+            # todo_details=Tododata.objects.create(first=login_details)
 
         except Exception, e:
             print("Our Error=", str(e))
@@ -166,7 +166,7 @@ def home(request):
         print("Title=",mytitle)
         # myselect = request.POST.get('Select')
         # print("Select Field=",myselect)
-        mydesc = request.POST.get('Desc')
+        mydesc = request.POST.get('Desparagtiwari314@gmail.comc')
         print("Description=",mydesc)
         mydate = request.POST.get('Date')
         print("Dateeeeee=",mydate)
@@ -244,55 +244,171 @@ def display(request):
         key = 'secret'
         decoded = jwt.decode(token, key, algorithms='HS256')
         encoded = jwt.encode(decoded, key, algorithm='HS256')
-        datee = datetime.datetime.strptime(mydate, '%d/%m/%Y').strftime('%Y-%m-%d')
-        ID = decoded['Id']
-        data1 = Userdata.objects.get(id=ID)
-        print("Data1",data1)
-        # data2 =Tododata.objects.get(first=data1)
-        # myduedate=data2.duedate
-        # print("All duedates===",myduedate)
-        # mystatus=data2.status
-        # print("All Status===",mystatus)
-        nowdate = datetime.datetime.today().date()
-        print("Nowwww dateeeee===", nowdate)
-        datee = datetime.datetime.strptime(str(nowdate), ('%Y-%m-%d')).strftime('%Y-%m-%d')
-        print("Comaparedd Date===", datee)
-        print("Outsideeeee ifffff")
-        if Mytype==-1:
-            print("Insideeeee Ifffffffffffff")
-            # nowdate=datetime.datetime.today().date()
-            # print("Nowwww dateeeee===",nowdate)
-            # datee = datetime.datetime.strptime(str(nowdate), ('%Y-%m-%d')).strftime('%Y-%m-%d')
-            # print("Comaparedd Date===",datee)
-            qdata1= Tododata.objects.filter(first=data1,status=False,
-                                            duedate__lt=nowdate,complete_date=datee)
-            print("Query Set for -11111=",qdata1)
-            bjson =[]
-            try:
+        if mydate=='' or mydate==None:
+            print("Inside blank mydateeeeeeeee")
+            # datee = datetime.datetime.strptime(mydate, '%d/%m/%Y').strftime('%Y-%m-%d')
+            ID = decoded['Id']
+            data1 = Userdata.objects.get(id=ID)
+            print("Data1", data1)
+            # data2 =Tododata.objects.get(first=data1)
+            # myduedate=data2.duedate
+            # print("All duedates===",myduedate)
+            # mystatus=data2.status
+            # print("All Status===",mystatus)
+            nowdate = datetime.datetime.today().date()
+            print("Nowwww dateeeee===", nowdate)
+            datee = datetime.datetime.strptime(str(nowdate), ('%Y-%m-%d')).strftime('%Y-%m-%d')
+            print("Comaparedd Date===", datee)
+            print("Outsideeeee ifffff")
+            if Mytype == -1:
+                print("Insideeeee Ifffffffffffff")
+                # nowdate=datetime.datetime.today().date()
+                # print("Nowwww dateeeee===",nowdate)
+                # datee = datetime.datetime.strptime(str(nowdate), ('%Y-%m-%d')).strftime('%Y-%m-%d')
+                # print("Comaparedd Date===",datee)
+                qdata1 = Tododata.objects.filter(first=data1, status=False,
+                                                 duedate__lt=nowdate)
+                print("Query Set for -11111=", qdata1)
+                bjson = []
+                try:
 
-                for i in qdata1:
-                      ostatus=i.status
-                      oduedate=i.duedate
-                      odesc=i.description
-                      otitle=i.title
-                      Id=i.id
-                      print("After loop status==",ostatus)
-                      print("After loop duedate==",oduedate)
-                      print("After loop desc==", odesc)
-                      print("After loop title==", otitle)
-                      print("Id====",Id)
-                      tempjson={"Status":ostatus,"Duedate":oduedate,"Desc":odesc,
-                                "Title":otitle,"ID":Id}
+                    for i in qdata1:
+                        ostatus = i.status
+                        oduedate = i.duedate
+                        odesc = i.description
+                        otitle = i.title
+                        Id = i.id
+                        createddate=i.created_date
+                        print("After loop status==", ostatus)
+                        print("After loop duedate==", oduedate)
+                        print("After loop desc==", odesc)
+                        print("After loop title==", otitle)
+                        print("Id====", Id)
+                        tempjson = {"Status": ostatus, "Duedate": oduedate, "Desc": odesc,
+                                    "Title": otitle, "ID": Id,"Cdate":createddate}
 
-                      bjson.append(tempjson)
-                print("Bjsoonnn=",bjson)
-            except Exception, e:
-                print("Our Error=", str(e))
-            template=get_template('show.html')
-            context=Context({"Bjson":bjson,"Success": True, "Encoded":encoded,
-                             "Type":Mytype})
-            html=template.render(context)
-            return HttpResponse(html)
+                        bjson.append(tempjson)
+                    print("Bjsoonnn=", bjson)
+                except Exception, e:
+                    print("Our Error=", str(e))
+                template = get_template('show.html')
+                print("TYYYPEEEEE=", Mytype)
+                context = Context({"Bjson": bjson, "Success": True, "Encoded": encoded,
+                                   "Type": Mytype})
+                html = template.render(context)
+                return HttpResponse(html)
+            elif Mytype==0:
+                print("Insideee O functionality")
+                qdata2 = Tododata.objects.filter(first=data1,status=False,
+                                                         duedate__gte=nowdate,complete_date=datee)
+                print("Query set for 00000==",qdata2)
+                bjson = []
+                for i in qdata2:
+                    ostatus = i.status
+                    oduedate = i.duedate
+                    odesc = i.description
+                    otitle = i.title
+                    createddate = i.created_date
+                    print("After loop status==", ostatus)
+                    print("After loop duedate==", oduedate)
+                    print("After loop desc==", odesc)
+                    print("After loop title==", otitle)
+                    tempjson = {"Status": ostatus, "Duedate": oduedate, "Desc": odesc,
+                                "Title": otitle,"Cdate":createddate}
+
+                    bjson.append(tempjson)
+                print("Bjsoonnn=", bjson)
+                template = get_template('show.html')
+                print("TYYYPEEEEE=", Mytype)
+                context = Context({"Bjson": bjson, "Success": True, "Encoded": encoded,
+                                   "Type": Mytype})
+                html = template.render(context)
+                return HttpResponse(html)
+            else:
+                print("Insidee 111 FUNCTIONALITY")
+                qdata3=Tododata.objects.filter(first=data1,status=True)
+                print("Query set for 11111====",qdata3)
+                bjson = []
+                for i in qdata3:
+                    ostatus = i.status
+                    oduedate = i.duedate
+                    odesc = i.description
+                    otitle = i.title
+                    Iddd=i.id
+                    createddate = i.created_date
+                    print("After loop status==", ostatus)
+                    print("After loop duedate==", oduedate)
+                    print("After loop desc==", odesc)
+                    print("After loop title==", otitle)
+                    print("Idddddddddddddd=",Iddd)
+
+                    tempjson = {"Status": ostatus, "Duedate": oduedate, "Desc": odesc,
+                                "Title": otitle,"Cdate":createddate}
+
+                    bjson.append(tempjson)
+                print("Bjsoonnn=", bjson)
+                template = get_template('show.html')
+                print("TYYYPEEEEE=", Mytype)
+                context = Context({"Bjson": bjson, "Success": True, "Encoded": encoded,
+                                   "Type": Mytype})
+                html = template.render(context)
+                return HttpResponse(html)
+
+
+        else:
+            print("insideee else my dateeeeee")
+            datee = datetime.datetime.strptime(mydate, '%d/%m/%Y').strftime('%Y-%m-%d')
+            print("Changed Format===",datee)
+            ID = decoded['Id']
+            data1 = Userdata.objects.get(id=ID)
+            print("Data1",data1)
+            # data2 =Tododata.objects.get(first=data1)
+            # myduedate=data2.duedate
+            # print("All duedates===",myduedate)
+            # mystatus=data2.status
+            # print("All Status===",mystatus)
+            nowdate = datetime.datetime.today().date()
+            print("Nowwww dateeeee===", nowdate)
+            # datee = datetime.datetime.strptime(str(nowdate), ('%Y/%m/%d')).strftime('%Y-%m-%d')
+            # print("Comaparedd Date===", datee)
+            print("Outsideeeee ifffff")
+            if Mytype==-1:
+                print("Insideeeee Ifffffffffffff")
+                # nowdate=datetime.datetime.today().date()
+                # print("Nowwww dateeeee===",nowdate)
+                # datee = datetime.datetime.strptime(str(nowdate), ('%Y-%m-%d')).strftime('%Y-%m-%d')
+                # print("Comaparedd Date===",datee)
+                qdata1= Tododata.objects.filter(first=data1,status=False,
+                                                duedate__lt=nowdate,created_date=datee)
+                print("Query Set for -11111=",qdata1)
+                bjson =[]
+                try:
+
+                    for i in qdata1:
+                          ostatus=i.status
+                          oduedate=i.duedate
+                          odesc=i.description
+                          otitle=i.title
+                          Id=i.id
+
+                          print("After loop status==",ostatus)
+                          print("After loop duedate==",oduedate)
+                          print("After loop desc==", odesc)
+                          print("After loop title==", otitle)
+                          print("Id====",Id)
+                          tempjson={"Status":ostatus,"Duedate":oduedate,"Desc":odesc,
+                                    "Title":otitle,"ID":Id}
+                          print("Temp Jsonnnn=",tempjson)
+                          bjson.append(tempjson)
+                    print("Bjsoonnn=",bjson)
+                except Exception, e:
+                    print("Our Error=", str(e))
+                template=get_template('show.html')
+                print("Type===",Mytype)
+                context=Context({"Bjson":bjson,"Success": True, "Encoded":encoded,
+                                 "Type":Mytype})
+                html=template.render(context)
+                return HttpResponse(html)
 
 
             # encoded = jwt.encode(decoded, key, algorithm='HS256')
@@ -300,55 +416,57 @@ def display(request):
             #                                        "Encoded":encoded})
             # return render(request,"show.html",{"Bjson":bjson})
 
-        elif Mytype==0:
-            print("Insideee O functionality")
-            qdata2 = Tododata.objects.filter(first=data1,status=False,
-                                                     duedate__gte=datee)
-            print("Query set for 00000==",qdata2)
-            bjson = []
-            for i in qdata2:
-                ostatus = i.status
-                oduedate = i.duedate
-                odesc = i.description
-                otitle = i.title
-                print("After loop status==", ostatus)
-                print("After loop duedate==", oduedate)
-                print("After loop desc==", odesc)
-                print("After loop title==", otitle)
-                tempjson = {"Status": ostatus, "Duedate": oduedate, "Desc": odesc,
-                            "Title": otitle}
+            elif Mytype==0:
+                print("Insideee O functionality")
+                qdata2 = Tododata.objects.filter(first=data1,status=False,
+                                                         duedate__gte=nowdate,complete_date=datee)
+                print("Query set for 00000==",qdata2)
+                bjson = []
+                for i in qdata2:
+                    ostatus = i.status
+                    oduedate = i.duedate
+                    odesc = i.description
+                    otitle = i.title
+                    print("After loop status==", ostatus)
+                    print("After loop duedate==", oduedate)
+                    print("After loop desc==", odesc)
+                    print("After loop title==", otitle)
+                    tempjson = {"Status": ostatus, "Duedate": oduedate, "Desc": odesc,
+                                "Title": otitle}
 
-                bjson.append(tempjson)
-            print("Bjsoonnn=", bjson)
-            template = get_template('show.html')
-            context = Context({"Bjson": bjson, "Success": True, "Encoded": encoded})
-            html = template.render(context)
-            return HttpResponse(html)
-        else:
-            print("Insidee 111 FUNCTIONALITY")
-            qdata3=Tododata.objects.filter(first=data1,status=True)
-            print("Query set for 11111====",qdata3)
-            bjson = []
-            for i in qdata3:
-                ostatus = i.status
-                oduedate = i.duedate
-                odesc = i.description
-                otitle = i.title
-                Iddd=i.id
-                print("After loop status==", ostatus)
-                print("After loop duedate==", oduedate)
-                print("After loop desc==", odesc)
-                print("After loop title==", otitle)
-                print("Idddddddddddddd=",Iddd)
-                tempjson = {"Status": ostatus, "Duedate": oduedate, "Desc": odesc,
-                            "Title": otitle}
+                    bjson.append(tempjson)
+                print("Bjsoonnn=", bjson)
+                template = get_template('show.html')
+                context = Context({"Bjson":bjson,"Success": True, "Encoded":encoded,
+                                 "Type":Mytype})
+                html = template.render(context)
+                return HttpResponse(html)
+            else:
+                print("Insidee 111 FUNCTIONALITY")
+                qdata3=Tododata.objects.filter(first=data1,status=True,created_date=datee)
+                print("Query set for 11111====",qdata3)
+                bjson = []
+                for i in qdata3:
+                    ostatus = i.status
+                    oduedate = i.duedate
+                    odesc = i.description
+                    otitle = i.title
+                    Iddd=i.id
+                    print("After loop status==", ostatus)
+                    print("After loop duedate==", oduedate)
+                    print("After loop desc==", odesc)
+                    print("After loop title==", otitle)
+                    print("Idddddddddddddd=",Iddd)
+                    tempjson = {"Status": ostatus, "Duedate": oduedate, "Desc": odesc,
+                                "Title": otitle}
 
-                bjson.append(tempjson)
-            print("Bjsoonnn=", bjson)
-            template = get_template('show.html')
-            context = Context({"Bjson": bjson, "Success": True, "Encoded": encoded})
-            html = template.render(context)
-            return HttpResponse(html)
+                    bjson.append(tempjson)
+                print("Bjsoonnn=", bjson)
+                template = get_template('show.html')
+                context = Context({"Bjson":bjson,"Success": True, "Encoded":encoded,
+                                 "Type":Mytype})
+                html = template.render(context)
+                return HttpResponse(html)
 
 @csrf_exempt
 def updatetodostatus(request):

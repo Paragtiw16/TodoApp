@@ -8,9 +8,11 @@
             <tr><td>Description</td><br/><td>{{ i.Desc }}</td></tr><br/>
             <tr><td>Duedate</td><br/><td>{{ i.Duedate }}</td></tr><br/>
             <tr><td>Status</td><br/><td>{{ i.Status }}</td></tr><br/>
+            <tr><td>Created Date</td><br/><td>{{ i.Cdate }}</td></tr><br/>
 
 
 </table></p>
+{% if Type != 1 %}
         </div>
         <div class="card-action">
 {#          <a href="#">This is a link</a>#}
@@ -22,6 +24,6 @@
         </div>
       </div>
      </div>
-
+{% endif %}
 
 {% endfor %}
