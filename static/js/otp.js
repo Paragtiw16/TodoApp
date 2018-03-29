@@ -36,7 +36,7 @@ function click2() {
                 // console.log(script.Email);
                 myemaill = script.Email;
                 console.log(myemaill);
-                window.location.href = "/todo/otppage?&MyEmail=" + myemaill
+                // window.location.href = "/todo/otppage?&MyEmail=" + myemaill
 
 
             }

@@ -10,9 +10,9 @@
     /*margin-bottom: 100px;*/
     /*margin-right: 150px;*/
     /*margin-left: 80px;*/
-    width:700px;
-    height: 400px;
-    height: 550px;
+    /*width:700px;*/
+    /*height: 200px;*/
+    /*height: 450px;*/
 
 
     text-align: center;
@@ -39,7 +39,37 @@
   /*main {*/
     /*flex: 1 0 auto;*/
   /*}*/
-
+footer{
+    height: 150px;
+}
 body{
-    background-color: #c4dce8;
+    background-color: #e2eaef;
+}
+#tabs_todo{
+    color:#1b5e20;
+
+}
+.table_title{
+    font-size: 25px;
+    border-color: white;
+    border-bottom-: 100px;
+
+}
+.table_desc{
+    font-size:18px;
+}
+.table_due{
+    border-style: solid;
+    border-radius: 100px;
+}
+.table_created{
+    border-style: solid;
+    border-radius: 100px;
+}
+#completedbtn{
+    justify-content: center;
+    /*border-style: solid;*/
+}
+#ftext{
+    text-align: center;
 }

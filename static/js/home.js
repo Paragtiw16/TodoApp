@@ -1,72 +1,48 @@
-
-
-
-
 $(document).ready(function () {
     $('.tabs').tabs();
     $('.modal').modal();
-     $('#modal3').modal();
     //  $('#modal').modal('type','id');
     $('select').formSelect();
-
     $('.datepicker').datepicker({
+            onOpen:function (e) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+
+                },
         format:'dd/mm/yyyy',
-        parse:null,
+        // parse:null,
         container:'body',
         firstDay:0,
         // minDate:Date.now(),
         // minDate:today.getDate(),
         // minDate:new Date(),
-        maxDate:null});
-        updateTabContent(-1);
-
-
+        // maxDate:null
+    });
+    updateTabContent(-1);
 });
 function filterByDate() {
-    console.log("Inside filter by date");
     var getdate = document.getElementById('filter_date').value;
     var tabid=$("#tabs_todo").find('li a.active').attr('id');
-    // var getting = browser.tabs.get(integer. (-1));
-//     $('.tabs').click(function(){
-// var a=$(this).attr('id');
-// $('#sample').html('Active Tab is'+a);
-// });
-//     var tabid=$('.tabs. active').id;
-//     alert(tabid);
-    console.log("Tab Id=",tabid);
-   var tab = tabid.replace('tab_','');
-    console.log("Tab Id=",tab);
+    var tab = tabid.replace('tab_','');
     var newtabid=parseInt(tab);
-    console.log("new Tab Id=",newtabid);
-//     alert(getting);
-    alert(getdate);
     updateTabContent(newtabid,getdate);
 
 }
- function click5(type,id)
- {
-     // alert("Inside Status function");
-     // alert(type);
-     // alert(id);
-     document.getElementById('modelid').value=id;
-     document.getElementById('modeltype').value=type
-     $('#modal3').modal('open');
-     // var getid = document.getElementById('id').value;
-     // alert(getid)
-     // var gettype = document.getElementById('type').value;
-     // alert(gettype)
-     // $('.modal2').modal('open');
 
-
-
- }
- function click6()
- {
-      var getid = document.getElementById('modelid').value;
+function click5(type,id)
+{
+    // alert("Ins
+    document.getElementById('modelid').value=id;
+    document.getElementById('modeltype').value=type;
+    $('#modal3').modal('open');
+}
+function click6()
+{
+    var getid = document.getElementById('modelid').value;
     var gettype = document.getElementById('modeltype').value;
-     // alert(getid);
-     // alert(gettype);
-     $.ajax({
+    // alert(getid);
+    // alert(gettype);
+    $.ajax({
 
         url: '/todo/updatetodostatus/',
         method: "POST",
@@ -103,7 +79,7 @@ function filterByDate() {
         }
     });
 
- }
+}
 function updateTabContent(type,date)
 {
     // alert(type);
@@ -112,10 +88,10 @@ function updateTabContent(type,date)
     {
 
         // alert("Insideee -1 1st Methoddddd");
-         var gettoken = document.getElementById('token').value;
+        var gettoken = document.getElementById('token').value;
         // json={"Type":-1,"Encoded":token};
         c=getJson(type,gettoken,date);
-         callAPI(c);
+        callAPI(c);
 
     }
 
@@ -123,10 +99,10 @@ function updateTabContent(type,date)
     {
 
         // alert("Insideee 0 2nd Methoddddd");
-         var gettoken = document.getElementById('token').value;
+        var gettoken = document.getElementById('token').value;
         // json={"Type":-1,"Encoded":token};
         c=getJson(type,gettoken,date);
-         callAPI(c);
+        callAPI(c);
 
     }
 
@@ -135,14 +111,14 @@ function updateTabContent(type,date)
 
         // alert("Insideee 1 3rd Methoddddd");
 
-         var gettoken = document.getElementById('token').value;
+        var gettoken = document.getElementById('token').value;
         // json={"Type":-1,"Encoded":token};
         // alert(type);
         // alert(date);
         console.log("Date in 3 Method==",date);
         c=getJson(type,gettoken,date);
         console.log(c);
-         callAPI(c);
+        callAPI(c);
 
     }
 
@@ -167,19 +143,19 @@ function callAPI(JSON) {
             console.log(html);
             $('#tab_content').html(html);
 
-            }
+        }
 
     });
 
 }
 
-function click4() {
+function creatingATodo() {
     var gettitle = document.getElementById('title').value;
     var gettoken = document.getElementById('token').value;
     var getdesc = document.getElementById('desc').value;
     var getdate = document.getElementById('date').value;
     // var getselect = document.getElementById('select').value;
-
+    // alert("Desc===",getdesc);
 
     if (gettitle == null || gettitle == "") {
         // alert("Username must be filled out");
@@ -205,9 +181,9 @@ function click4() {
             method: "POST",
             data: {
                 "Title": gettitle, "Desc": getdesc,
-                "Date": getdate, "Token": gettoken
+                "Datee": getdate, "Token": gettoken
             },
-            // dataType: 'application/json; charset=utf-8',
+            dataType: 'application/json; charset=utf-8',
             success: function (base) {
                 console.log(base);
                 // alert(base);
@@ -217,14 +193,14 @@ function click4() {
 
                     console.log("Insideeeee succcessss offf LLLooogginnn");
                     // myemail=check.Email
-                    token = base.Token
-                    window.location.href = "/todo/home?Token=" + token;
+                    // token = base.Token
+                    window.location.href = "/todo/home"
                 }
                 else {
                     console.log("Innnnsiiiideee Faaalllseee of login  jssss");
 
                     // alert(base.Message);
-
+                     M.toast({html: ' Todo not saved!', classes: 'rounded'});
 
                     window.location.href = "/todo/home";
 

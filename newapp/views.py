@@ -166,9 +166,9 @@ def home(request):
         print("Title=",mytitle)
         # myselect = request.POST.get('Select')
         # print("Select Field=",myselect)
-        mydesc = request.POST.get('Desparagtiwari314@gmail.comc')
+        mydesc = request.POST.get('Desc')
         print("Description=",mydesc)
-        mydate = request.POST.get('Date')
+        mydate = request.POST.get('Datee')
         print("Dateeeeee=",mydate)
         # gettoken = request.POST.get('Token')
         # defaultdate=datetime.date.today
