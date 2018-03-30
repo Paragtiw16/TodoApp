@@ -4,15 +4,11 @@ $(document).ready(function () {
     //  $('#modal').modal('type','id');
     $('select').formSelect();
     $('.datepicker').datepicker({
-            onOpen:function (e) {
-                event.preventDefault();
-                event.stopImmediatePropagation();
 
-                },
         format:'dd/mm/yyyy',
         // parse:null,
-        container:'body',
-        firstDay:0,
+        // container:'body',
+        firstDay:0
         // minDate:Date.now(),
         // minDate:today.getDate(),
         // minDate:new Date(),
@@ -34,19 +30,24 @@ function click5(type,id)
     // alert("Ins
     document.getElementById('modelid').value=id;
     document.getElementById('modeltype').value=type;
+    // alert(id);
+    // alert(type);
     $('#modal3').modal('open');
 }
 function click6()
 {
     var getid = document.getElementById('modelid').value;
     var gettype = document.getElementById('modeltype').value;
+     var gettoken = document.getElementById('token').value;
+
     // alert(getid);
     // alert(gettype);
+    alert(gettoken);
     $.ajax({
 
         url: '/todo/updatetodostatus/',
         method: "POST",
-        data: {"Id":getid,"Type":gettype},
+        data: {"Id":getid,"Type":gettype,"Tokenn":gettoken},
         // dataType: 'application/json; charset=utf-8',
         success:function (yes)
         {
@@ -60,15 +61,16 @@ function click6()
                 console.log("Insideeeee succcessss offf Todo Status");
                 // myemail=check.Email
                 message=yes.Message;
-                alert(message);
-
-                // window.location.href="/todo/profile?Token="+token;
+                // alert(message);
+                decoded=yes.Encodedd;
+                // alert(decoded);
+                window.location.href="/todo/home?Token=" + decoded;
             }
             else
             {
                 console.log("Innnnsiiiideee Faaalllseee of login  jssss");
 
-                alert(base.Message);
+                // alert(base.Message);
 
 
                 window.location.href="/todo/home";
@@ -150,6 +152,7 @@ function callAPI(JSON) {
 }
 
 function creatingATodo() {
+    // alert("Inside Creating a Todo===");
     var gettitle = document.getElementById('title').value;
     var gettoken = document.getElementById('token').value;
     var getdesc = document.getElementById('desc').value;
@@ -157,24 +160,27 @@ function creatingATodo() {
     // var getselect = document.getElementById('select').value;
     // alert("Desc===",getdesc);
 
-    if (gettitle == null || gettitle == "") {
-        // alert("Username must be filled out");
-        M.toast({html: ' Title field is empty!', classes: 'rounded'});
-        return false;
-    }
-    if (getdesc == null || getdesc == "") {
-        // alert("Username must be filled out");
-        M.toast({html: ' Description field is empty!', classes: 'rounded'});
-        return false;
-    }
-    if (getdate == null || getdate == "") {
-        // alert("Username must be filled out");
-        M.toast({html: ' Date field is Empty!', classes: 'rounded'});
-        return false;
-    }
+    // if (gettitle == null || gettitle == "") {
+    //     // alert("Username must be filled out");
+    //     M.toast({html: ' Title field is empty!', classes: 'rounded'});
+    //     return false;
+    // }
+    // if (getdesc == null || getdesc == "") {
+    //     // alert("Username must be filled out");
+    //     M.toast({html: ' Description field is empty!', classes: 'rounded'});
+    //     return false;
+    // }
+    // if (getdate == null || getdate == "") {
+    //     // alert("Username must be filled out");
+    //     M.toast({html: ' Date field is Empty!', classes: 'rounded'});
+    //     return false;
+    // }
+    //    alert(gettitle);
+    //
+    //    alert(getdesc);
+    //    alert(getdate);
 
-
-    else {
+    // else {
         $.ajax({
 
             url: '/todo/home/',
@@ -209,7 +215,7 @@ function creatingATodo() {
             }
         });
     }
-}
+// }
 
 // function validateForm() {
 //     var x = document.forms["myForm"]["fname"].value;

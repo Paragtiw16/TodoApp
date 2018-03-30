@@ -19,8 +19,9 @@
 
 </head>
 <body>
-{% include 'header.html' %}
+{% include 'logout.html' %}
 <!--JavaScript at end of body for optimized loading-->
+
 <script type="text/javascript" src="{% static 'js/home.js' %}"></script>
 <div class="container">
     <script>var access_token='{{ Encoded }}';</script>
@@ -69,8 +70,6 @@
             <input type="hidden"  placeholder="Enter Type" id="modeltype" name="type" value="">
             <p>Are you sure you want to make this todo completed?</p>
 
-            <br/>
-
 
         </div>
         <div class="modal-footer">
@@ -110,12 +109,12 @@
                            name="desc"><br/>
         Duedate:<input type="text" id="date" class="datepicker"/>
 
-        <p hidden>Token:</p><input type="hidden" id="token"  value="{{ Encoded }}"><br/>
+        <p hidden>Token:</p><input type="hidden" id="token"  value="{{ Encoded }}">
 
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat"
-      onclick="creatingATodo">Submit</a>
+      onclick="creatingATodo()">Submit</a>
         <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
     </div>
   </div>

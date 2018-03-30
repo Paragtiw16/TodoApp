@@ -1,34 +1,64 @@
 <head>
     <LINK href="/static/admin/css/style.css" rel="stylesheet" type="text/css">
 </head>
+{% if Message %}
+    {% if Bjson == "" or Bjson == None %}
+          <p>No todos created</p>
+        {% endif %}
+{% endif %}
 
-
-{% for i in Bjson %}
+{#     {% if Type != 1 %}#}
      <div class="col s12 m6">
+     {% for i in Bjson %}
       <div class="card blue-grey darken-1">
+
         <div class="card-content white-text">
 {#          <span class="card-title"></span>#}
           <p><table class="white-text" >
-            <tr class="table_title"><br/><td>{{ i.Title  }}</td></tr>
-            <tr class="table_desc"><br/><td>{{ i.Desc }}</td></tr>
-            <tr class="table_due"><td>Duedate:</td><br/><td>{{ i.Duedate }}</td></tr>
-{#            <tr><td>Status</td><br/><td>{{ i.Status }}</td></tr>#}
-            <tr class="table_created"><td>Created Date:</td><br/><td>{{ i.Cdate }}</td></tr>
+            <p class="table_title">{{ i.Title  }}</p>
+            <p class="table_desc">{{ i.Desc }}</p>
+         <tr class="table_due"><td>Duedate:</td><td>{{ i.Duedate }}</td></tr>
+        <tr class="table_created"><td>Created Date:</td><td>{{ i.Cdate }}</td></tr>
+            {% if Type == 1 %}
+
+             <tr class="table_created"><td>Completed Date:</td><td>{{ i.Compldate }}</td></tr>
+            {% endif %}
 
 
+
+
+
+</div>
 </table></p>
-{% if Type != 1 %}
-        </div>
-{#        <div class="card-action">#}
-{#          <a href="#">This is a link</a>#}
+      {% if Type != 1 %}
+          <div class="wrapper">
+
             <button class="btn center green darken-4" id="completedbtn" type="submit" name="action"
             onclick="click5({{ Type }},{{ i.ID }})">Complete
-    <i class="material-icons right">send</i>
-  </button>
-{#          <input type="submit" value="Change Status" onclick="click5({{ Type }},{{ i.ID }})" />#}
-{#        </div>#}
-      </div>
+</button>
+    </div>
+      {% endif %}
+    </div>
+     {% endfor %}
      </div>
-{% endif %}
 
-{% endfor %}
+
+
+{#          <div class="col s12 m6">#}
+{#      <div class="card blue-grey darken-1">#}
+{#        <div class="card-content white-text">#}
+{#          <span class="card-title"></span>#}
+{#          <p><table class="white-text" >#}
+{#            <p class="table_title">{{ i.Title  }}</p>#}
+{#            <p class="table_desc">{{ i.Desc }}</p>#}
+{#         <tr class="table_due"><td>Duedate:</td><td>{{ i.Duedate }}</td></tr>#}
+{#        <tr class="table_created"><td>Completed Date:</td><td>{{ i.Compldate }}</td></tr>#}
+{#      </div>#}
+{#</table></p>#}
+{#    </div>#}
+{#     </div>#}
+
+
+{#{% endif %}#}
+{##}
+{#{% endfor %}#}

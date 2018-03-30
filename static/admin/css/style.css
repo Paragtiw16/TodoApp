@@ -50,26 +50,41 @@ body{
 
 }
 .table_title{
-    font-size: 25px;
-    border-color: white;
-    border-bottom-: 100px;
+    font-size: 24px;
+    /*border-bottom: white;*/
+    /*border-radius:50px;*/
+     /*border-bottom: 1px solid;*/
+     border-bottom: 1px solid white;
+    margin-bottom:1px;
 
 }
 .table_desc{
     font-size:18px;
 }
-.table_due{
-    border-style: solid;
-    border-radius: 100px;
-}
-.table_created{
-    border-style: solid;
-    border-radius: 100px;
-}
+/*.table_due{*/
+    /*border-style: solid;*/
+    /*border-bottom-color: currentColor;*/
+    /*border-radius: 100px;*/
+/*}*/
+/*.table_created{*/
+    /*border-style: solid;*/
+    /*border-radius: 100px;*/
+/*}*/
 #completedbtn{
     justify-content: center;
     /*border-style: solid;*/
+    /*position: absolute;*/
+    /*top: 50%;*/
+    width: 100px;
+    height: 40px;
 }
 #ftext{
     text-align: center;
+}
+.wrapper {
+    text-align: center;
+}
+#filter_date{
+    width: auto;
+    align-content: center;
 }

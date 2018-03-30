@@ -308,20 +308,23 @@ def display(request):
                     oduedate = i.duedate
                     odesc = i.description
                     otitle = i.title
+                    Id = i.id
                     createddate = i.created_date
                     print("After loop status==", ostatus)
                     print("After loop duedate==", oduedate)
                     print("After loop desc==", odesc)
                     print("After loop title==", otitle)
                     tempjson = {"Status": ostatus, "Duedate": oduedate, "Desc": odesc,
-                                "Title": otitle,"Cdate":createddate}
+                                "Title": otitle,"ID": Id,"Cdate":createddate}
 
                     bjson.append(tempjson)
                 print("Bjsoonnn=", bjson)
                 template = get_template('show.html')
                 print("TYYYPEEEEE=", Mytype)
+
                 context = Context({"Bjson": bjson, "Success": True, "Encoded": encoded,
                                    "Type": Mytype})
+
                 html = template.render(context)
                 return HttpResponse(html)
             else:
@@ -336,6 +339,7 @@ def display(request):
                     otitle = i.title
                     Iddd=i.id
                     createddate = i.created_date
+                    compltddate=i.complete_date
                     print("After loop status==", ostatus)
                     print("After loop duedate==", oduedate)
                     print("After loop desc==", odesc)
@@ -343,7 +347,7 @@ def display(request):
                     print("Idddddddddddddd=",Iddd)
 
                     tempjson = {"Status": ostatus, "Duedate": oduedate, "Desc": odesc,
-                                "Title": otitle,"Cdate":createddate}
+                                "Title": otitle,"Cdate":createddate,"Compldate":compltddate}
 
                     bjson.append(tempjson)
                 print("Bjsoonnn=", bjson)
@@ -351,6 +355,7 @@ def display(request):
                 print("TYYYPEEEEE=", Mytype)
                 context = Context({"Bjson": bjson, "Success": True, "Encoded": encoded,
                                    "Type": Mytype})
+                # print("Context===",context)
                 html = template.render(context)
                 return HttpResponse(html)
 
@@ -427,12 +432,13 @@ def display(request):
                     oduedate = i.duedate
                     odesc = i.description
                     otitle = i.title
+                    Id=i.id
                     print("After loop status==", ostatus)
                     print("After loop duedate==", oduedate)
                     print("After loop desc==", odesc)
                     print("After loop title==", otitle)
                     tempjson = {"Status": ostatus, "Duedate": oduedate, "Desc": odesc,
-                                "Title": otitle}
+                                "Title": otitle,"ID":Id}
 
                     bjson.append(tempjson)
                 print("Bjsoonnn=", bjson)
@@ -476,6 +482,7 @@ def updatetodostatus(request):
         print("Id======",myid)
         mytype = request.POST.get('Type')
         print("Typeee====",mytype)
+        encoded = request.POST.get('Tokenn')
         data1 = Tododata.objects.get(id=myid)
         print("Instance of Todo TABLE=====",data1)
         nowdate = datetime.datetime.today().date()
@@ -485,7 +492,7 @@ def updatetodostatus(request):
         data1.complete_date=nowdate
         data1.save()
         msg="This Todo has been completed"
-        return JsonResponse({"Message":msg, "Success": True})
+        return JsonResponse({"Message":msg, "Success": True,"Encodedd":encoded})
 
 
 
