@@ -1,9 +1,12 @@
 <head>
     <LINK href="/static/admin/css/style.css" rel="stylesheet" type="text/css">
 </head>
-{% if Message %}
-    {% if Bjson == "" or Bjson == None %}
-          <p>No todos created</p>
+{% if  Success %}
+    {% if Bjson == None %}
+         {% if Type == -1 %}
+             <p>No todos </p>
+
+           {% endif %}
         {% endif %}
 {% endif %}
 

@@ -295,6 +295,8 @@ def display(request):
                 print("TYYYPEEEEE=", Mytype)
                 context = Context({"Bjson": bjson, "Success": True, "Encoded": encoded,
                                    "Type": Mytype})
+
+                print("Context===",context)
                 html = template.render(context)
                 return HttpResponse(html)
             elif Mytype==0:
@@ -355,7 +357,7 @@ def display(request):
                 print("TYYYPEEEEE=", Mytype)
                 context = Context({"Bjson": bjson, "Success": True, "Encoded": encoded,
                                    "Type": Mytype})
-                # print("Context===",context)
+                print("Context===",context)
                 html = template.render(context)
                 return HttpResponse(html)
 
@@ -424,7 +426,7 @@ def display(request):
             elif Mytype==0:
                 print("Insideee O functionality")
                 qdata2 = Tododata.objects.filter(first=data1,status=False,
-                                                         duedate__gte=nowdate,complete_date=datee)
+                                                         duedate__gte=nowdate,created_date=datee)
                 print("Query set for 00000==",qdata2)
                 bjson = []
                 for i in qdata2:
@@ -449,7 +451,7 @@ def display(request):
                 return HttpResponse(html)
             else:
                 print("Insidee 111 FUNCTIONALITY")
-                qdata3=Tododata.objects.filter(first=data1,status=True,created_date=datee)
+                qdata3=Tododata.objects.filter(first=data1,status=True,complete_date=datee)
                 print("Query set for 11111====",qdata3)
                 bjson = []
                 for i in qdata3:
