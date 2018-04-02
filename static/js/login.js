@@ -1,3 +1,21 @@
+
+$(document).ready(function () {
+
+
+    $('#fr input').keydown(function (e) {
+        if (e.keyCode == 13) {
+            $('#fr').trigger(click3())
+        }
+    });
+
+});
+
+
+
+
+
+
+
 function click3() {
 
 

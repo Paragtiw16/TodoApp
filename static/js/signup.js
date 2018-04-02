@@ -1,3 +1,18 @@
+
+$(document).ready(function () {
+
+
+    $('#frm input').keydown(function (e) {
+        if (e.keyCode == 13) {
+            $('#frm').trigger(click1())
+        }
+    });
+
+});
+
+
+
+
 function click1() {
     var name = document.getElementById('uname').value;
     if (name===null || name==="") {

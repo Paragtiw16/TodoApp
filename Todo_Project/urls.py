@@ -16,7 +16,13 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
+from newapp.views import login_login
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^todo/',include('newapp.urls'))
+    url(r'^', include('newapp.urls')),
+    url(r'^todo/',include('newapp.urls')),
+    # url(r'^todo/',login_login,name=login_login)
+
+    # url(r'^$', 'django.views.generic.simple.redirect_to', {'url': '/todo/home/'}),
 ]

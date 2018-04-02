@@ -1,3 +1,23 @@
+
+$(document).ready(function () {
+
+
+    $('#frmm input').keydown(function (e) {
+        if (e.keyCode == 13) {
+            $('#frmm').trigger(click2())
+        }
+    });
+
+});
+
+
+
+
+
+
+
+
+
 function click2() {
     var get_otp = document.getElementById('otp').value;
     if (get_otp==null || get_otp=="") {

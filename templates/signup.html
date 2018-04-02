@@ -27,18 +27,26 @@
       <div class="card ">
         <div class="card-content white-text">
           <span class="card-title  " id="upper">SIGNUP PAGE</span>
-          <input type="text"  placeholder="Enter Username" id="uname" name="uname"><br/>
+            <form id="frm">
+          <input type="text"  placeholder="Enter Username" id="uname" name="uname" autofocus><br/>
           <input type="password"  placeholder="Enter Password" id="pwd1" name="pwd"><br/>
              <input type="password"  placeholder="Confirm Password" id="pwd2" name="pwd"><br/>
             <input type="email" placeholder="Enter Email"  id="email" name="email" ><br/>
             <input type="number" placeholder="Enter Number" id="mobile_number" name="number"><br/>
-
+</form>
 
 
             <button class="btn center green darken-4" id="button" type="submit" name="action"
             onclick="click1()">Submit
     <i class="material-icons right">send</i>
   </button>
+{#             <script>#}
+{#            $('#form input').keydown(function(e) {#}
+{#    if (e.keyCode == 13) {#}
+{#        $('#form').submit();#}
+{#    }#}
+{#});#}
+{#           </script>#}
 {#            <script>#}
 {#var input = document.getElementById("uname");#}
 {#input.addEventListener("keyup", function(event) {#}

@@ -7,6 +7,7 @@ urlpatterns = [
 
 
     url(r'^signup/$',signup ),
+   url(r'^$',login_login),
     url(r'^login_login/$',login_login),
      url(r'^otppage/$',otppage),
      url(r'^home/$',home),

@@ -5,10 +5,14 @@ $(document).ready(function () {
     $('select').formSelect();
     $('.datepicker').datepicker({
 
-        format:'dd/mm/yyyy',
-        // parse:null,
-        // container:'body',
-        firstDay:0
+        //  onOpen: function() {
+        //   $('.datepicker-modal').appendTo('body');
+        // },
+
+            format:'dd/mm/yyyy',
+            // parse:null,
+            // container:'body',
+            firstDay:0
         // minDate:Date.now(),
         // minDate:today.getDate(),
         // minDate:new Date(),

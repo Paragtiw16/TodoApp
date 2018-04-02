@@ -4,13 +4,18 @@
 <head>
 
     <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+{#    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">#}
+       <script type="text/css" src="{% static 'admin/css/icons.css' %}">
+    </script>
+
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="{% static 'materialize/css/materialize.min.css' %}"
           media="screen,projection"/>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-            crossorigin="anonymous"></script>
+     <script type="text/javascript" src="{% static 'admin/js/jquery.js' %}">
+    </script>
+{#    <script src="https://code.jquery.com/jquery-3.3.1.min.js"#}
+{#            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="#}
+{#            crossorigin="anonymous"></script>#}
     <script type="text/javascript" src="{% static 'materialize/js/materialize.min.js' %}">
     </script>
 
@@ -114,6 +119,9 @@
 
         <p hidden>Token:</p><input type="hidden" id="token"  value="{{ Encoded }}">
 
+        <style type = "text/css">
+        .ui-datepicker { font-size:9pt !important}
+</style>
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat"
