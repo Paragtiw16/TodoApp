@@ -12,7 +12,9 @@
     /*margin-left: 80px;*/
     /*width:700px;*/
     /*height: 200px;*/
+
     /*height: 450px;*/
+
 
 
     text-align: center;
@@ -90,6 +92,63 @@ body{
 }
 dues{
     text-align: center;
+}
+
+.wrap {
+    width: 100%;
+}
+
+.floatleft {
+    float:left;
+    width: 20%;
+    background-color: #1b5e20 ;
+    height: 710px;
+}
+
+.floatright {
+float: right;
+    background-color:  #e2eaef;
+    height: 710px;
+    width: 80%;
+}
+#tdp{
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+    /*color: white;*/
+    font-size: medium;
+    background-color: white;
+    color: white;
+}
+.lg{
+    color: white;
+    font-size:larger;
+}
+#btnn{
+    color: white;
+    text-align: center;
+    background-color: black;
+    /*margin: 6px 8px;*/
+    margin-top: 10px;
+    margin-left: 30px;
+    border-radius: 20px;
+    height:28px;
+    line-height: 28px;
+
+
+}
+#tdl{
+    margin-top: 20px;
+    margin-left: 30px;
+    color: black;
+    background-color: white;
+    /*box-shadow: 5px 10px;*/
+}
+
+.crght{
+    margin-top: 450px;
+    text-align: center;
+    color: white;
 }
 /*#date.datepicker{*/
     /*width: 400px;*/

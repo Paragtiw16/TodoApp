@@ -18,7 +18,7 @@ $(document).ready(function () {
         // minDate:new Date(),
         // maxDate:null
     });
-    updateTabContent(-1);
+    // updateTabContent(-1);
 });
 function filterByDate() {
     var getdate = document.getElementById('filter_date').value;
@@ -132,6 +132,29 @@ function updateTabContent(type,date)
 function getJson(value,token,date) {
     // alert("Inside Secondd Methoddd");
     return {"Type":value,"Encoded":token,"Date":date};
+
+}
+function showTodoList() {
+    alert("Insideeee new Htmlllll");
+     var gettoken = document.getElementById('token').value;
+    $.ajax({
+
+        url: '/todo/side/',
+        method: "GET",
+        data: {"Token":gettoken},
+        // dataType: 'application/json; charset=utf-8',
+        success:function (response)
+        {
+            console.log("Inside new Ajaxxxxx");
+            console.log(response);
+            console.log("After getting Html in New ajax");
+            $('#new_div').html(response);
+
+        }
+
+    });
+
+
 
 }
 function callAPI(JSON) {

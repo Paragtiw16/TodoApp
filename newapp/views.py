@@ -496,7 +496,12 @@ def updatetodostatus(request):
         msg="This Todo has been completed"
         return JsonResponse({"Message":msg, "Success": True,"Encodedd":encoded})
 
-
+@csrf_exempt
+def side(request):
+    if request.method == "GET":
+        print("INsideee new apiiiiii")
+        encoded = request.GET.get('Token')
+        return render(request, "side.html",{"Token":encoded})
 
 
 

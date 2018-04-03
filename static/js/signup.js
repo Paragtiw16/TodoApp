@@ -1,23 +1,8 @@
-
-$(document).ready(function () {
-
-
-    $('#frm input').keydown(function (e) {
-        if (e.keyCode == 13) {
-            $('#frm').trigger(click1())
-        }
-    });
-
-});
-
-
-
-
 function click1() {
     var name = document.getElementById('uname').value;
     if (name===null || name==="") {
         // alert("Username must be filled out");
-         M.toast({html: 'Username must be filled out!', classes: 'rounded'});
+        M.toast({html: 'Username must be filled out!', classes: 'rounded'});
         return false;
     }
 
@@ -27,51 +12,51 @@ function click1() {
         M.toast({html: 'Password did not match', classes: 'rounded'});
         return false;
     }
-     if (pswd1===null || pswd1==="") {
+    if (pswd1===null || pswd1==="") {
         // alert("Password should be filled out");
-         M.toast({html: 'Password must be filled out!', classes: 'rounded'});
+        M.toast({html: 'Password must be filled out!', classes: 'rounded'});
         return false;
     }
-     re = /[0-9]/;
-     if(!re.test(pswd1))
-     {
-         M.toast({html: 'Password must contain atleast one number!', classes: 'rounded'});
+    re = /[0-9]/;
+    if(!re.test(pswd1))
+    {
+        M.toast({html: 'Password must contain atleast one number!', classes: 'rounded'});
         return false;
-     }
+    }
 
-     re =  /[a-z]/;
-     if(!re.test(pswd1))
-     {
-         M.toast({html: 'Password must contain atleast lower case letter!', classes: 'rounded'});
+    re =  /[a-z]/;
+    if(!re.test(pswd1))
+    {
+        M.toast({html: 'Password must contain atleast lower case letter!', classes: 'rounded'});
         return false;
-     }
-     re = /[A-Z]/;
-     if(!re.test(pswd1))
-     {
-         M.toast({html: 'Password must contain atleast Upper case letter', classes: 'rounded'});
+    }
+    re = /[A-Z]/;
+    if(!re.test(pswd1))
+    {
+        M.toast({html: 'Password must contain atleast Upper case letter', classes: 'rounded'});
         return false;
-     }
+    }
 
     var email = document.getElementById('email').value;
-     if (email==null || email=="") {
+    if (email==null || email=="") {
         // alert("Email should be filled out");
-         M.toast({html: 'Email must be filled out!', classes: 'rounded'});
+        M.toast({html: 'Email must be filled out!', classes: 'rounded'});
         return false;
     }
 
 
     var number = document.getElementById('mobile_number').value;
-     if (number===null || number==="" ) {
-         alert(number);
-         // alert("Number should be filled out");
-         M.toast({html: 'Number must be filled out!', classes: 'rounded'});
-         return false;
-     }
-     if (number.length!==10){
-          // alert(number.length);
-         M.toast({html: 'Number must be of 10 Digits', classes: 'rounded'});
-         return false;
-     }
+    if (number===null || number==="" ) {
+        alert(number);
+        // alert("Number should be filled out");
+        M.toast({html: 'Number must be filled out!', classes: 'rounded'});
+        return false;
+    }
+    if (number.length!==10){
+        // alert(number.length);
+        M.toast({html: 'Number must be of 10 Digits', classes: 'rounded'});
+        return false;
+    }
 
 
 
@@ -100,3 +85,18 @@ function click1() {
         });
     }
 }
+
+
+
+
+
+$(document).ready(function () {
+
+
+    $('#frm input').keydown(function (e) {
+        if (e.keyCode == 13) {
+            $('#frm').trigger(click1())
+        }
+    });
+
+});
