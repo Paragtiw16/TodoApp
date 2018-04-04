@@ -1,6 +1,7 @@
 import datetime
 import jwt
 from django.http import JsonResponse, HttpResponse
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, render_to_response
 from django.template import Context
 from django.template.loader import get_template
@@ -137,29 +138,32 @@ def login_login(request):
 @csrf_exempt
 def home(request):
     if request.method == "GET":
-        # print('OOOOOOOOOOTTTTTTTTTTPPPPPPPP')
-         print("Insideeeeeeeeeee HOOOOOOOOMEEEEEE")
-         key = 'secret'
-         encoded=request.GET.get('Token')
-         print("getting encoding value=",encoded)
-         decoded = jwt.decode(encoded, key, algorithms='HS256')
-         # encoded = jwt.encode(decoded, key, algorithm='HS256')
+        if 'Encoded' in request.session:
+             print("Insideeeeeeeeeee HOOOOOOOOMEEEEEE")
+             key = 'secret'
+             encoded=request.GET.get('Token')
+             print("getting encoding value=",encoded)
+             decoded = jwt.decode(encoded, key, algorithms='HS256')
+             # encoded = jwt.encode(decoded, key, algorithm='HS256')
 
-         print("Decodedddddddd Jsssooonnnn=",decoded)
-         ID=decoded['Id']
-         print("Idddddd=====",ID)
-         try:
+             print("Decodedddddddd Jsssooonnnn=",decoded)
+             ID=decoded['Id']
+             print("Idddddd=====",ID)
+             try:
 
-             data1 = Userdata.objects.get(id=ID)
-         except Exception, e:
-               print("Apna  Error=", str(e))
-         print(data1)
-         username=data1.username
-         email =data1.email
-         contactno=data1.contactno
-         encoded = jwt.encode(decoded, key, algorithm='HS256')
-         return render(request, "home.html",{"Email":email,"Username":username,
-                                              "Contact_no":contactno,"Encoded":encoded})
+                 data1 = Userdata.objects.get(id=ID)
+             except Exception, e:
+                   print("Apna  Error=", str(e))
+             print(data1)
+             username=data1.username
+             email =data1.email
+             contactno=data1.contactno
+             encoded = jwt.encode(decoded, key, algorithm='HS256')
+             return render(request, "home.html",{"Email":email,"Username":username,
+                                                  "Contact_no":contactno,"Encoded":encoded})
+        else:
+            return HttpResponseRedirect('/todo/login_login/')
+
     elif request.method == "POST":
         print("Insiddeeeeee llooooogggiiinnn POOOOSSTTT")
         mytitle = request.POST.get('Title')
@@ -503,5 +507,14 @@ def side(request):
         encoded = request.GET.get('Token')
         return render(request, "side.html",{"Token":encoded})
 
+def user_logout(request):
+    if request.method == "GET":
+        print("Insidee User logoutttt")
+        if 'Encoded' in request.session:
+            del request.session['Encoded']
+            return HttpResponseRedirect('/todo/login_login/')
+        else:
+            session=request.session.get('Encoded')
+            return HttpResponseRedirect('/todo/home/?Token='+session)
 
 

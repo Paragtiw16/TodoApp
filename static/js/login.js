@@ -30,10 +30,10 @@ function click3() {
         // alert("Username must be filled out");
         M.toast({html: 'Password must be filled out!', classes: 'rounded'});
         return false;
+
     }
 
-    // alert(get_email);
-    // alert(get_pwd);
+
 
     else {
 

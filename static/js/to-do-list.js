@@ -1,6 +1,9 @@
 $(document).ready(function () {
     $('.tabs').tabs();
     $('.modal').modal();
+    $('.sidenav').sidenav();
+
+
     //  $('#modal').modal('type','id');
     $('select').formSelect();
     $('.datepicker').datepicker({
@@ -9,16 +12,17 @@ $(document).ready(function () {
         //   $('.datepicker-modal').appendTo('body');
         // },
 
-            format:'dd/mm/yyyy',
-            // parse:null,
-            // container:'body',
-            firstDay:0
+        format:'dd/mm/yyyy',
+        // parse:null,
+        // container:'body',
+        firstDay:0
         // minDate:Date.now(),
         // minDate:today.getDate(),
         // minDate:new Date(),
         // maxDate:null
     });
     // updateTabContent(-1);
+    // showTodoList();
 });
 function filterByDate() {
     var getdate = document.getElementById('filter_date').value;
@@ -42,7 +46,7 @@ function click6()
 {
     var getid = document.getElementById('modelid').value;
     var gettype = document.getElementById('modeltype').value;
-     var gettoken = document.getElementById('token').value;
+    var gettoken = document.getElementById('token').value;
 
     // alert(getid);
     // alert(gettype);
@@ -115,12 +119,10 @@ function updateTabContent(type,date)
     else
     {
 
-        // alert("Insideee 1 3rd Methoddddd");
+
 
         var gettoken = document.getElementById('token').value;
-        // json={"Type":-1,"Encoded":token};
-        // alert(type);
-        // alert(date);
+
         console.log("Date in 3 Method==",date);
         c=getJson(type,gettoken,date);
         console.log(c);
@@ -130,36 +132,11 @@ function updateTabContent(type,date)
 
 }
 function getJson(value,token,date) {
-    // alert("Inside Secondd Methoddd");
+
     return {"Type":value,"Encoded":token,"Date":date};
 
 }
-function showTodoList() {
-    alert("Insideeee new Htmlllll");
-     var gettoken = document.getElementById('token').value;
-    $.ajax({
-
-        url: '/todo/side/',
-        method: "GET",
-        data: {"Token":gettoken},
-        // dataType: 'application/json; charset=utf-8',
-        success:function (response)
-        {
-            console.log("Inside new Ajaxxxxx");
-            console.log(response);
-            console.log("After getting Html in New ajax");
-            $('#new_div').html(response);
-
-        }
-
-    });
-
-
-
-}
 function callAPI(JSON) {
-    // alert("Callinggg APPIIIIIII");
-    // alert("JSONNNNNNN=",JSON);
     console.log(JSON);
     $.ajax({
 
@@ -208,46 +185,38 @@ function creatingATodo() {
     //    alert(getdate);
 
     // else {
-        $.ajax({
+    $.ajax({
 
-            url: '/todo/home/',
-            method: "POST",
-            data: {
-                "Title": gettitle, "Desc": getdesc,
-                "Datee": getdate, "Token": gettoken
-            },
-            dataType: 'application/json; charset=utf-8',
-            success: function (base) {
-                console.log(base);
-                // alert(base);
-                // alert(base.Success);
-                // token=check.Encoded;
-                if (base.Success == true) {
+        url: '/todo/home/',
+        method: "POST",
+        data: {
+            "Title": gettitle, "Desc": getdesc,
+            "Datee": getdate, "Token": gettoken
+        },
+        dataType: 'application/json; charset=utf-8',
+        success: function (base) {
+            console.log(base);
+            // alert(base);
+            // alert(base.Success);
+            // token=check.Encoded;
+            if (base.Success == true) {
 
-                    console.log("Insideeeee succcessss offf LLLooogginnn");
-                    // myemail=check.Email
-                    // token = base.Token
-                    window.location.href = "/todo/home"
-                }
-                else {
-                    console.log("Innnnsiiiideee Faaalllseee of login  jssss");
-
-                    // alert(base.Message);
-                     M.toast({html: ' Todo not saved!', classes: 'rounded'});
-
-                    window.location.href = "/todo/home";
-
-
-                }
+                console.log("Insideeeee succcessss offf LLLooogginnn");
+                // myemail=check.Email
+                // token = base.Token
+                window.location.href = "/todo/home"
             }
-        });
-    }
-// }
+            else {
+                console.log("Innnnsiiiideee Faaalllseee of login  jssss");
 
-// function validateForm() {
-//     var x = document.forms["myForm"]["fname"].value;
-//     if (x == "") {
-//         alert("Name must be filled out");
-//         return false;
-//     }
-// }
+                // alert(base.Message);
+                M.toast({html: ' Todo not saved!', classes: 'rounded'});
+
+                window.location.href = "/todo/home";
+
+
+            }
+        }
+    });
+}
+
