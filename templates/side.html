@@ -1,7 +1,28 @@
 
 {% load static %}
-<script type="text/javascript" src="{% static 'js/to-do-list.js' %}"></script>
+{#<script type="text/javascript" src="{% static 'js/to-do-list.js' %}"></script>#}
+<script>
+                   var count_overdues={{ Count_overdues  }};
+                   {#alert(count_overdues);#}
+                   var count_dues={{ Count_dues }};
+                   alert(count_dues);
+                    var a='{{ Flag }}';
+                    var flag_home_notification;
+                   {#var flag_home_notification={{ Flag }};#}
 
+                   if (a === 'True')
+                   {
+                       flag_home_notification=true;
+
+                   }else
+                   {
+                       flag_home_notification=false;
+                   }
+                   {#return flag_home_notification                #}
+                   console.log(flag_home_notification);
+
+                </script>
+<script type="text/javascript" src="{% static 'js/to-do-list.js' %}"></script>
 
 <div class="container" id="new_div">
     <script>var access_token='{{ Encoded }}';</script>
@@ -12,6 +33,18 @@
                     <button data-target="modal1" class="btn modal-trigger green darken-4">Create a New Todo</button>
                 </div>
             </div>
+
+    <div class="col s12 right-align ">
+      <div class="card  green darken-4">
+        <div class="card-content white-text">
+          <span class="card-title">Notification</span>
+          <p>You have<span id="total_overdues"></span> overdues</p>
+        </div>
+
+      </div>
+    </div>
+
+
             <div class="row">
                 <div class="col s12">
                     <ul class="tabs" id="tabs_todo">
@@ -56,6 +89,11 @@
                                    name="desc"><br/>
                 Duedate:<input type="text" id="date" class="datepicker"/>
                 <p hidden>Token:</p><input type="hidden" id="token"  value="{{ Token }}">
+
+{#                <p hidden>Countoverdues:</p><input type="hidden" id="co"  value="{{ Count_overdues}}">#}
+{#                <p hidden>Countdues:</p><input type="hidden" id="cd"  value="{{ Count_dues  }}">#}
+{#                <p hidden>flag:</p><input type="hidden" id="flag"  value="{{ flag_home_notification }}">#}
+
 
 
 

@@ -505,7 +505,34 @@ def side(request):
     if request.method == "GET":
         print("INsideee new apiiiiii")
         encoded = request.GET.get('Token')
-        return render(request, "side.html",{"Token":encoded})
+        flag_home_notification = True
+        key = 'secret'
+        decoded = jwt.decode(encoded, key, algorithms='HS256')
+        ID = decoded['Id']
+        user_instance = Userdata.objects.get(id=ID)
+        print("Data1", user_instance)
+        nowdate = datetime.datetime.today().date()
+        datee = datetime.datetime.strptime(str(nowdate), ('%Y-%m-%d')).strftime('%Y-%m-%d')
+        count_overdues = Tododata.objects.filter(first=user_instance, status=False,
+                                         duedate__lt=nowdate).count()
+        print("No. of Overduess==", count_overdues)
+        count_dues= Tododata.objects.filter(first=user_instance, status=False,
+                                         duedate__gte=nowdate, complete_date=datee).count()
+        print("No. of duess==",count_dues)
+        if count_overdues==0 and count_dues==0:
+            print("Insideee Iffffffffff")
+            flag_home_notification = False
+            print("Flag notification=",flag_home_notification)
+            print("Count overdues===",count_overdues)
+            print("Count dues====",count_dues)
+            return render(request, "side.html", {"Token": encoded,"Count_overdues":count_overdues,
+                                                 "Count_dues":count_dues,"Flag":flag_home_notification})
+
+        else:
+            return render(request, "side.html", {"Token": encoded, "Count_overdues": count_overdues,
+                                                 "Count_dues": count_dues, "Flag": flag_home_notification})
+
+
 
 def user_logout(request):
     if request.method == "GET":
@@ -516,5 +543,6 @@ def user_logout(request):
         else:
             session=request.session.get('Encoded')
             return HttpResponseRedirect('/todo/home/?Token='+session)
+
 
 

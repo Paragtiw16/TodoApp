@@ -1,3 +1,7 @@
+var flag_home_notification;
+var count_overdues;
+var count_dues;
+
 $(document).ready(function () {
     $('.tabs').tabs();
     $('.modal').modal();
@@ -21,9 +25,35 @@ $(document).ready(function () {
         // minDate:new Date(),
         // maxDate:null
     });
+
+    check_flag_notify();
     // updateTabContent(-1);
     // showTodoList();
 });
+
+function check_flag_notify() {
+    // alert("Insideeee check flag method");
+    // var flag_home_notification = document.getElementById('flag').value;
+    // alert(flag_home_notification);
+    alert('qqq'+count_dues);
+    var a = count_dues;
+    if (flag_home_notification===true)
+    {
+        alert('111'+flag_home_notification)
+        // alert("Inside if check flag notify method=");
+        // var session =sessionStorage.setItem("flag_home_notification",true);
+        // alert("Session=",session);
+        //  alert("Count Overdues=",count_overdues);
+         alert("Count dues="+a);
+          $('#total_overdues').html(a);
+    }
+    else{
+        alert("Inside else ")
+
+
+    }
+
+}
 function filterByDate() {
     var getdate = document.getElementById('filter_date').value;
     var tabid=$("#tabs_todo").find('li a.active').attr('id');
