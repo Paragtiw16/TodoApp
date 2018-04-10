@@ -1,11 +1,13 @@
-var flag_home_notification;
-var count_overdues;
-var count_dues;
-
+//  var flag_home_storage= localStorage.getItem("flag_home_notification");
+// alert("Starting of js="+flag_home_storage);
+//     var count_overdues_storage= localStorage.getItem("count_overdues");
+//     var count_dues_storage= localStorage.getItem("count_dues");
 $(document).ready(function () {
     $('.tabs').tabs();
     $('.modal').modal();
     $('.sidenav').sidenav();
+    $('#todo_notification').hide();
+    showOrHideNotification();
 
 
     //  $('#modal').modal('type','id');
@@ -26,32 +28,76 @@ $(document).ready(function () {
         // maxDate:null
     });
 
-    check_flag_notify();
-    // updateTabContent(-1);
-    // showTodoList();
 });
 
-function check_flag_notify() {
-    // alert("Insideeee check flag method");
-    // var flag_home_notification = document.getElementById('flag').value;
-    // alert(flag_home_notification);
-    alert('qqq'+count_dues);
-    var a = count_dues;
-    if (flag_home_notification===true)
-    {
-        alert('111'+flag_home_notification)
-        // alert("Inside if check flag notify method=");
-        // var session =sessionStorage.setItem("flag_home_notification",true);
-        // alert("Session=",session);
-        //  alert("Count Overdues=",count_overdues);
-         alert("Count dues="+a);
-          $('#total_overdues').html(a);
+function showOrHideNotification() {
+   var seen_var= localStorage.getItem("seen");
+
+    var flag_home_storage= localStorage.getItem("flag_home_notification");
+    alert("Inside show or hide="+flag_home_storage);
+    var count_overdues_storage= localStorage.getItem("count_overdues");
+    var count_dues_storage= localStorage.getItem("count_dues");
+    if (flag_home_storage==='true') {
+        if (typeof seen_var === 'undefined') {
+            alert("Inside if of undefined seeen var");
+                alert('1111' + flag_home_storage);
+                $('#todo_notification').show();
+                $('#total_overdues').html(count_overdues_storage);
+                $('#total_dues').html(count_dues_storage);
+                                            }
+        else {
+            alert("Inside else of undefined var ");
+             var last_day=localStorage.getItem("last_day", dd);
+             var last_month=localStorage.getItem("last_month", mm);
+             var last_year=localStorage.getItem("last_year", yyyy);
+             console.log(last_day);
+             console.log(last_month);
+            console.log(last_year);
+             var today = new Date();
+            var date = today.getDate();
+            var month = today.getMonth();
+            var year = today.getFullYear();
+            console.log(date);
+            console.log(month);
+            console.log(year);
+            if(date===parseInt(last_day) && month===parseInt(last_month) &&
+                year===parseInt(last_year))
+            {
+                alert("Inside if of comparing ");
+                 $('#todo_notification').hide();
+            }
+            else {
+                alert("Inside else of comparing");
+                    $('#todo_notification').show();
+            }
+
+
+        }
     }
     else{
-        alert("Inside else ")
+        alert("Inside else ");
 
-
+        $('#todo_notification').hide();
     }
+
+}
+function close_button() {
+    var flag_home_storage= localStorage.getItem("flag_home_notification");
+    localStorage.setItem("seen", 1);
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth();
+    var yyyy = today.getFullYear();
+     localStorage.setItem("last_day", dd);
+      localStorage.setItem("last_month", mm);
+      localStorage.setItem("last_year", yyyy);
+
+    alert("Inside close button function");
+     alert("11111"+flag_home_storage);
+    localStorage.setItem("flag_home_notification", false);
+    var flag_home_storagee= localStorage.getItem("flag_home_notification");
+    alert("22222"+flag_home_storagee);
+    showOrHideNotification();
 
 }
 function filterByDate() {
@@ -65,14 +111,14 @@ function filterByDate() {
 
 function click5(type,id)
 {
-    // alert("Ins
+   alert("Inside method");
     document.getElementById('modelid').value=id;
     document.getElementById('modeltype').value=type;
     // alert(id);
     // alert(type);
     $('#modal3').modal('open');
 }
-function click6()
+function  click6()
 {
     var getid = document.getElementById('modelid').value;
     var gettype = document.getElementById('modeltype').value;

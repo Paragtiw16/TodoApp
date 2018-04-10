@@ -529,6 +529,7 @@ def side(request):
                                                  "Count_dues":count_dues,"Flag":flag_home_notification})
 
         else:
+            print ("Flag notification=",flag_home_notification)
             return render(request, "side.html", {"Token": encoded, "Count_overdues": count_overdues,
                                                  "Count_dues": count_dues, "Flag": flag_home_notification})
 
